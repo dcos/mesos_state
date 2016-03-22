@@ -1,0 +1,1281 @@
+{
+  "attributes": {},
+  "build_date": "2016-02-01 17:14:42",
+  "build_time": 1454346882,
+  "build_user": "root",
+  "completed_frameworks": [],
+  "flags": {
+    "appc_store_dir": "/tmp/mesos/store/appc",
+    "authenticatee": "crammd5",
+    "cgroups_cpu_enable_pids_and_tids_count": "false",
+    "cgroups_enable_cfs": "false",
+    "cgroups_hierarchy": "/sys/fs/cgroup",
+    "cgroups_limit_swap": "false",
+    "cgroups_root": "mesos",
+    "container_disk_watch_interval": "15secs",
+    "containerizers": "mesos,docker",
+    "default_role": "*",
+    "disk_watch_interval": "1mins",
+    "docker": "docker",
+    "docker_auth_server": "https://auth.docker.io",
+    "docker_kill_orphans": "true",
+    "docker_puller_timeout": "60",
+    "docker_registry": "https://registry-1.docker.io",
+    "docker_remove_delay": "6hrs",
+    "docker_socket": "/var/run/docker.sock",
+    "docker_stop_timeout": "0ns",
+    "docker_store_dir": "/tmp/mesos/store/docker",
+    "enforce_container_disk_quota": "false",
+    "executor_registration_timeout": "1mins",
+    "executor_shutdown_grace_period": "5secs",
+    "fetcher_cache_dir": "/tmp/mesos/fetch",
+    "fetcher_cache_size": "2GB",
+    "frameworks_home": "",
+    "gc_delay": "1hrs",
+    "gc_disk_headroom": "0.1",
+    "hadoop_home": "",
+    "help": "false",
+    "hostname_lookup": "true",
+    "image_provisioner_backend": "copy",
+    "initialize_driver_logging": "true",
+    "isolation": "",
+    "launcher_dir": "/usr/libexec/mesos",
+    "log_dir": "/var/log/mesos",
+    "logbufsecs": "0",
+    "logging_level": "INFO",
+    "master": "zk://localhost:2181/mesos",
+    "oversubscribed_resources_interval": "15secs",
+    "perf_duration": "10secs",
+    "perf_interval": "1mins",
+    "port": "5051",
+    "qos_correction_interval_min": "0ns",
+    "quiet": "false",
+    "recover": "reconnect",
+    "recovery_timeout": "15mins",
+    "registration_backoff_factor": "1secs",
+    "revocable_cpu_low_priority": "true",
+    "sandbox_directory": "/mnt/mesos/sandbox",
+    "strict": "true",
+    "switch_user": "true",
+    "systemd_runtime_directory": "/run/systemd/system",
+    "version": "false",
+    "work_dir": "/var/lib/mesos/slave"
+  },
+  "frameworks": [
+    {
+      "checkpoint": true,
+      "completed_executors": [
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.9acab042-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31250-31250]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377119.86538
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377119.96718
+                }
+              ]
+            }
+          ],
+          "container": "4e841b35-71a1-430f-87a2-db1f85426173",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.9acab042-e496-11e5-b2f1-0242816970c9/runs/4e841b35-71a1-430f-87a2-db1f85426173",
+          "id": "sleepfail.9acab042-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.9acab042-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.9acab042-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.9dc9bf73-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31214-31214]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377124.87513
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377124.97595
+                }
+              ]
+            }
+          ],
+          "container": "dc7a2ba5-811c-4524-91ad-5c3f83e82c9b",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.9dc9bf73-e496-11e5-b2f1-0242816970c9/runs/dc7a2ba5-811c-4524-91ad-5c3f83e82c9b",
+          "id": "sleepfail.9dc9bf73-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.9dc9bf73-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.9dc9bf73-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.a0c7bd34-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31595-31595]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377129.89489
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377129.99696
+                }
+              ]
+            }
+          ],
+          "container": "a99d08bc-ccb2-44cc-83c0-27f3e82ba67e",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.a0c7bd34-e496-11e5-b2f1-0242816970c9/runs/a99d08bc-ccb2-44cc-83c0-27f3e82ba67e",
+          "id": "sleepfail.a0c7bd34-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.a0c7bd34-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.a0c7bd34-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.a3c43455-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31061-31061]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377134.90811
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377135.00949
+                }
+              ]
+            }
+          ],
+          "container": "712873e3-2320-45e9-b953-7b64ff7da04a",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.a3c43455-e496-11e5-b2f1-0242816970c9/runs/712873e3-2320-45e9-b953-7b64ff7da04a",
+          "id": "sleepfail.a3c43455-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.a3c43455-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.a3c43455-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.a6c23216-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31122-31122]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377139.92087
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377140.02175
+                }
+              ]
+            }
+          ],
+          "container": "dca79208-d1b0-491f-8803-05a2d9e358d9",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.a6c23216-e496-11e5-b2f1-0242816970c9/runs/dca79208-d1b0-491f-8803-05a2d9e358d9",
+          "id": "sleepfail.a6c23216-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.a6c23216-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.a6c23216-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.a9c1b677-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31817-31817]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377144.95466
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377145.05707
+                }
+              ]
+            }
+          ],
+          "container": "8870f163-20bd-46dc-a6c1-0a6e9f7d51ac",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.a9c1b677-e496-11e5-b2f1-0242816970c9/runs/8870f163-20bd-46dc-a6c1-0a6e9f7d51ac",
+          "id": "sleepfail.a9c1b677-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.a9c1b677-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.a9c1b677-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.acc07788-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31305-31305]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377149.98122
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377150.08197
+                }
+              ]
+            }
+          ],
+          "container": "5bb34f40-6968-48b2-a1cf-455b07d35b89",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.acc07788-e496-11e5-b2f1-0242816970c9/runs/5bb34f40-6968-48b2-a1cf-455b07d35b89",
+          "id": "sleepfail.acc07788-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.acc07788-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.acc07788-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.afbe2729-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31250-31250]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377155.00906
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377155.10967
+                }
+              ]
+            }
+          ],
+          "container": "7b3a1f65-e857-4074-9892-0e32c2251c91",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.afbe2729-e496-11e5-b2f1-0242816970c9/runs/7b3a1f65-e857-4074-9892-0e32c2251c91",
+          "id": "sleepfail.afbe2729-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.afbe2729-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.afbe2729-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.b2bc24ea-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31549-31549]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377160.01344
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377160.11556
+                }
+              ]
+            }
+          ],
+          "container": "007df5b3-97ca-485d-9f25-8db4059402f9",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.b2bc24ea-e496-11e5-b2f1-0242816970c9/runs/007df5b3-97ca-485d-9f25-8db4059402f9",
+          "id": "sleepfail.b2bc24ea-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.b2bc24ea-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.b2bc24ea-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.b5b874fb-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31709-31709]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377165.02156
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377165.12317
+                }
+              ]
+            }
+          ],
+          "container": "4609afa6-4457-4fae-972a-e5dc5f2a149a",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.b5b874fb-e496-11e5-b2f1-0242816970c9/runs/4609afa6-4457-4fae-972a-e5dc5f2a149a",
+          "id": "sleepfail.b5b874fb-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.b5b874fb-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.b5b874fb-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.b8b672bc-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31276-31276]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377170.04368
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377170.14447
+                }
+              ]
+            }
+          ],
+          "container": "28848df7-3df9-45df-ab57-42c6118a3ef2",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.b8b672bc-e496-11e5-b2f1-0242816970c9/runs/28848df7-3df9-45df-ab57-42c6118a3ef2",
+          "id": "sleepfail.b8b672bc-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.b8b672bc-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.b8b672bc-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.bbb337fd-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31547-31547]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377175.05569
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377175.15625
+                }
+              ]
+            }
+          ],
+          "container": "c6890b35-f392-4374-a6d8-09549e6a14e1",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.bbb337fd-e496-11e5-b2f1-0242816970c9/runs/c6890b35-f392-4374-a6d8-09549e6a14e1",
+          "id": "sleepfail.bbb337fd-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.bbb337fd-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.bbb337fd-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.beb183de-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31422-31422]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377180.07769
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377180.17913
+                }
+              ]
+            }
+          ],
+          "container": "684b92b8-1c9d-40dc-972d-2bfb46666525",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.beb183de-e496-11e5-b2f1-0242816970c9/runs/684b92b8-1c9d-40dc-972d-2bfb46666525",
+          "id": "sleepfail.beb183de-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.beb183de-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.beb183de-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.c1ae491f-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31122-31122]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377185.09739
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377185.19837
+                }
+              ]
+            }
+          ],
+          "container": "3aff9378-78b7-460e-9d97-5f885f0681b3",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.c1ae491f-e496-11e5-b2f1-0242816970c9/runs/3aff9378-78b7-460e-9d97-5f885f0681b3",
+          "id": "sleepfail.c1ae491f-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.c1ae491f-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.c1ae491f-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.c4ac9500-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31078-31078]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377190.11391
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377190.21535
+                }
+              ]
+            }
+          ],
+          "container": "77aee28e-d200-41c2-aa3f-9c8b45a65c4e",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.c4ac9500-e496-11e5-b2f1-0242816970c9/runs/77aee28e-d200-41c2-aa3f-9c8b45a65c4e",
+          "id": "sleepfail.c4ac9500-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.c4ac9500-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.c4ac9500-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.c7aa1d91-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31431-31431]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377195.13243
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377195.23284
+                }
+              ]
+            }
+          ],
+          "container": "309cdcaa-7c8f-4b5a-b74c-9fd497a92f6c",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.c7aa1d91-e496-11e5-b2f1-0242816970c9/runs/309cdcaa-7c8f-4b5a-b74c-9fd497a92f6c",
+          "id": "sleepfail.c7aa1d91-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.c7aa1d91-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.c7aa1d91-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        },
+        {
+          "completed_tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleepfail.caa81b52-e496-11e5-b2f1-0242816970c9",
+              "name": "sleepfail",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31466-31466]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_FAILED",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457377200.15755
+                },
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_FAILED",
+                  "timestamp": 1457377200.25909
+                }
+              ]
+            }
+          ],
+          "container": "102eb962-5257-44cb-b0ed-7ca91cdf1e9c",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleepfail.caa81b52-e496-11e5-b2f1-0242816970c9/runs/102eb962-5257-44cb-b0ed-7ca91cdf1e9c",
+          "id": "sleepfail.caa81b52-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleepfail.caa81b52-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep5 && ex...')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.1,
+            "disk": 0,
+            "mem": 32
+          },
+          "source": "sleepfail.caa81b52-e496-11e5-b2f1-0242816970c9",
+          "tasks": []
+        }
+      ],
+      "executors": [
+        {
+          "completed_tasks": [],
+          "container": "8bdad929-24d8-4b57-bd1b-6b0b4a6c44f4",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleep10.4bfae841-e496-11e5-b2f1-0242816970c9/runs/8bdad929-24d8-4b57-bd1b-6b0b4a6c44f4",
+          "id": "sleep10.4bfae841-e496-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleep10.4bfae841-e496-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep 1000')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.2,
+            "disk": 0,
+            "mem": 48,
+            "ports": "[31382-31382]"
+          },
+          "source": "sleep10.4bfae841-e496-11e5-b2f1-0242816970c9",
+          "tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleep10.4bfae841-e496-11e5-b2f1-0242816970c9",
+              "name": "sleep10",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31382-31382]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_RUNNING",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457376987.63009
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "completed_tasks": [],
+          "container": "fdb3d8f1-86b3-4a3e-ad96-c0e7781565df",
+          "directory": "/var/lib/mesos/slave/slaves/e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0/frameworks/20150421-163349-16842879-5050-3746-0000/executors/sleep.85df5710-e493-11e5-b2f1-0242816970c9/runs/fdb3d8f1-86b3-4a3e-ad96-c0e7781565df",
+          "id": "sleep.85df5710-e493-11e5-b2f1-0242816970c9",
+          "name": "Command Executor (Task: sleep.85df5710-e493-11e5-b2f1-0242816970c9) (Command: sh -c 'sleep 10000')",
+          "queued_tasks": [],
+          "resources": {
+            "cpus": 0.2,
+            "disk": 0,
+            "mem": 48,
+            "ports": "[31900-31900]"
+          },
+          "source": "sleep.85df5710-e493-11e5-b2f1-0242816970c9",
+          "tasks": [
+            {
+              "executor_id": "",
+              "framework_id": "20150421-163349-16842879-5050-3746-0000",
+              "id": "sleep.85df5710-e493-11e5-b2f1-0242816970c9",
+              "name": "sleep",
+              "resources": {
+                "cpus": 0.1,
+                "disk": 0,
+                "mem": 16,
+                "ports": "[31900-31900]"
+              },
+              "slave_id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+              "state": "TASK_RUNNING",
+              "statuses": [
+                {
+                  "container_status": {
+                    "network_infos": [
+                      {
+                        "ip_address": "33.33.33.2",
+                        "ip_addresses": [
+                          {
+                            "ip_address": "33.33.33.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "healthy": true,
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1457375796.43876
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "failover_timeout": 604800,
+      "hostname": "ubuntu",
+      "id": "20150421-163349-16842879-5050-3746-0000",
+      "name": "marathon",
+      "role": "*",
+      "user": "root"
+    }
+  ],
+  "git_sha": "c29b3b6801846cda270aab17a670542ec5d238f5",
+  "git_tag": "0.27.0",
+  "hostname": "ubuntu",
+  "id": "e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0",
+  "log_dir": "/var/log/mesos",
+  "master_hostname": "ubuntu",
+  "pid": "slave(1)@33.33.33.2:5051",
+  "resources": {
+    "cpus": 3,
+    "disk": 73590,
+    "mem": 2404,
+    "ports": "[31000-32000]"
+  },
+  "start_time": 1457375134.78466,
+  "version": "0.27.0"
+}
