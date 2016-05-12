@@ -14,11 +14,11 @@
 -include_lib("common_test/include/ct.hrl").
 
 %% API
--export([all/0, parse_json/1, test_lashup_publisher/1, parse_all/1]).
+-export([all/0, parse_json/1, parse_all/1]).
 
 
 all() ->
-  [parse_json, test_lashup_publisher, parse_all].
+  [parse_json, parse_all].
 
 parse_json(Config) ->
   DataDir = ?config(data_dir, Config),
@@ -33,16 +33,6 @@ parse_json(Config) ->
   <<"e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0">> = mesos_state_client:id(ParsedBody),
   ok.
 
-test_lashup_publisher(Config) ->
-  DataDir = ?config(data_dir, Config),
-  State2Json = filename:join(DataDir, "state2.json"),
-  {ok, State2JsonData} = file:read_file(State2Json),
-  {ok, ParsedBody} = mesos_state_client:parse_response(State2JsonData),
-  Tasks = mesos_state_client:tasks(ParsedBody),
-  ct:pal("Tasks: ~p", [Tasks]),
-  DITask = lists:keyfind(<<"sleep.bf108244-ec7f-11e5-b98e-82ce0fb60967">>, #task.id, Tasks),
-  ct:pal("Task: ~p", [DITask]),
-  ok.
 
 parse_all(Config) ->
   DataDir = ?config(data_dir, Config),
