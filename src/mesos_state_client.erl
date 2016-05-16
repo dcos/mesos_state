@@ -84,24 +84,31 @@ executors([_Executor = #{tasks := Tasks, completed_tasks := CompletedTasks}|Exec
 
 tasks([], _Framework, _Slave, _ParsedBody, TasksAcc) ->
   TasksAcc;
-tasks([Task | Tasks], Framework = #{name := FrameworkName}, Slave, ParsedBody, TasksAcc) ->
-  TaskRecord =
-    #task{
-      framework_id = maps:get(framework_id, Task, ""),
-      id = maps:get(id, Task),
-      labels = task_labels(maps:get(labels, Task, [])),
-      name = maps:get(name, Task),
-      executor_id = maps:get(executor_id, Task),
-      state = task_state(maps:get(state, Task)),
-      statuses = task_statuses(maps:get(statuses, Task, []), []),
-      resources = resources(maps:get(resources, Task)),
-      container = container(maps:get(container, Task, undefined)),
-      discovery = discovery(maps:get(discovery, Task, undefined)),
-      framework_name = FrameworkName,
-      slave = Slave
-    },
-  tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc]).
+tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
+  case catch task(Task, Framework, Slave) of
+    %% Don't bail on failed tasks
+    {'EXIT', Reason} ->
+      lager:warning("Failed to parse task: ~p", [Reason]),
+      tasks(Tasks, Framework, Slave, ParsedBody, TasksAcc);
+    TaskRecord ->
+      tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc])
+  end.
 
+task(Task, _Framework = #{name := FrameworkName}, Slave) ->
+  #task{
+    framework_id = maps:get(framework_id, Task, ""),
+    id = maps:get(id, Task),
+    labels = task_labels(maps:get(labels, Task, [])),
+    name = maps:get(name, Task),
+    executor_id = maps:get(executor_id, Task),
+    state = task_state(maps:get(state, Task)),
+    statuses = task_statuses(maps:get(statuses, Task, []), []),
+    resources = resources(maps:get(resources, Task)),
+    container = container(maps:get(container, Task, undefined)),
+    discovery = discovery(maps:get(discovery, Task, undefined)),
+    framework_name = FrameworkName,
+    slave = Slave
+  }.
 
 task_labels(Labels) ->
   Proplist = [{Key, Value} || #{key := Key, value := Value} <- Labels],
@@ -120,6 +127,8 @@ task_state(<<"TASK_FAILED">>) ->
   failed;
 task_state(<<"TASK_KILLED">>) ->
   killed;
+task_state(<<"TASK_KILLING">>) ->
+  killing;
 task_state(<<"TASK_LOST">>) ->
   lost;
 task_state(<<"TASK_ERROR">>) ->
