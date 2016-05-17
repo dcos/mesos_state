@@ -249,7 +249,7 @@ discovery_ports([], Acc) ->
 discovery_ports([Port = #{number := Number, protocol := Protocol}|RestPorts],
     Acc) ->
   PortRecord =
-  #port{
+  #mesos_port{
     name = maps:get(name, Port, undefined),
     number = Number,
     protocol = protocol(Protocol),

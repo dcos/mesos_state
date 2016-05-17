@@ -22,7 +22,7 @@
 -type hostname() :: binary().
 -type protocol() :: tcp | udp.
 
--record(port, {
+-record(mesos_port, {
   number :: inet:port_number(),
   name :: binary() | undefined,
   protocol :: protocol(),
@@ -30,7 +30,7 @@
 }).
 
 %% I made a mistake. port() is a built-in type.
--type mesos_port() :: #port{}.
+-type mesos_port() :: #mesos_port{}.
 
 -record(discovery, {
   name :: binary(),
