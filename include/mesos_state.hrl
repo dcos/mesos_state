@@ -123,5 +123,6 @@
   %% -executor id? (which is different than the executor id on
 }).
 
+-type task() :: #task{}.
 
 
