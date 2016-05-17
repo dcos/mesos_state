@@ -34,7 +34,7 @@
 
 -record(discovery, {
   name :: binary(),
-  ports :: [port()]
+  ports :: [mesos_port()]
 }).
 -type discovery() :: #discovery{}.
 
