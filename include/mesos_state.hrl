@@ -29,6 +29,8 @@
   labels :: labels()
 }).
 
+%% I made a mistake. port() is a built-in type.
+-type mesos_port() :: #port{}.
 
 -record(discovery, {
   name :: binary(),
