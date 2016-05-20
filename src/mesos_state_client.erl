@@ -26,6 +26,10 @@ poll() ->
 
 -spec(poll(URI :: string()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll(URI) ->
+  Options = [
+    {timeout, application:get_env(?APP, timeout, ?DEFAULT_TIMEOUT)},
+    {connect_timeout, application:get_env(?APP, connect_timeout, ?DEFAULT_CONNECT_TIMEOUT)}
+  ],
   Headers = [{"Accept", "application/json"}],
   Headers1 =
     case application:get_env(?APP, token) of
@@ -34,7 +38,7 @@ poll(URI) ->
       {ok, Value} ->
         [{"Authorization", Value}|Headers]
     end,
-  Response = httpc:request(get, {URI, Headers1}, [], [{body_format, binary}]),
+  Response = httpc:request(get, {URI, Headers1}, Options, [{body_format, binary}]),
   handle_response(Response).
 
 handle_response({error, Reason}) ->
