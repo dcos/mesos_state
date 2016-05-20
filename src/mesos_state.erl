@@ -13,8 +13,13 @@
 
 
 -ifdef(TEST).
+-include_lib("proper/include/proper.hrl").
 -include_lib("eunit/include/eunit.hrl").
 -endif.
+
+-type label_state() :: start | middle | terminate.
+-spec(label(LabelState :: label_state(), RemainingChar :: string(), Acc :: string()) -> string()).
+-define(ALLOWED_CHAR_GUARD(Char), (Char >= $a andalso Char =< $z) orelse (Char >= $0 andalso Char =< $9)).
 
 %% API
 -export([ip/0, domain_frag/1]).
@@ -84,10 +89,6 @@ label(Fragment) when is_binary(Fragment) ->
 label(FragmentStr) when is_list(FragmentStr) ->
     lists:reverse(label(start, FragmentStr, [])).
 
--type label_state() :: start | middle | terminate.
--spec(label(LabelState :: label_state(), RemainingChar :: string(), Acc :: string()) -> string()).
--define(ALLOWED_CHAR_GUARD(Char), (Char >= $a andalso Char =< $z) orelse (Char >= $0 andalso Char =< $9)).
-
 
 %% When stripping from the accumulator left and right are reversed because it's backwards
 label(_, [], Acc) ->
@@ -100,14 +101,12 @@ label(start, FragmentStr = [Char | _RestFragmentStr], Acc) when ?ALLOWED_CHAR_GU
 label(middle, FragmentStr, Acc0) when length(Acc0) > 62 ->
     Acc1 = string:strip(Acc0, left, $-),
     label(terminate, FragmentStr, Acc1);
-label(middle, [Char | RestFragmentStr], Acc) when ?ALLOWED_CHAR_GUARD(Char) ->
-    label(middle, RestFragmentStr, [Char | Acc]);
 label(middle, [Char | RestFragmentStr], Acc) when Char == $- orelse Char == $_ orelse Char == $. ->
     label(middle, RestFragmentStr, [$- | Acc]);
 label(terminate, _Str, Acc) when length(Acc) == 63 ->
     label(terminate, [], Acc);
-label(terminate, [Char | RestFragmentStr], Acc) when ?ALLOWED_CHAR_GUARD(Char) ->
-    label(terminate, RestFragmentStr, [Char | Acc]);
+label(State, [Char | RestFragmentStr], Acc) when ?ALLOWED_CHAR_GUARD(Char) ->
+    label(State, RestFragmentStr, [Char | Acc]);
 label(State, [_Char | RestFragmentStr], Acc) ->
     label(State, RestFragmentStr, Acc).
 
@@ -123,7 +122,23 @@ remap_test() ->
     ?assertEqual("fdgsf---gs7-fgs--d7fddg1234567890123456789012345678901234567891", label("%%fdgsf---gs7-fgs--d7fddg123456789012345678901234567890123456789---123")),
     ?assertEqual("4abc123", label("-4abc123")),
     ?assertEqual("fdgsf---gs7-fgs--d7fddg1234567890123456789012345678901234567891", label("$$fdgsf---gs7-fgs--d7fddg123456789012345678901234567890123456789-123")),
-    ?assertEqual("89fdgsf---gs7-fgs--d7fddg", label("89fdgsf---gs7-fgs--d7fddg-")).
+    ?assertEqual("89fdgsf---gs7-fgs--d7fddg", label("89fdgsf---gs7-fgs--d7fddg-")),
+    ?assertEqual("0-0", label("0-0")).
+
+all_prop_test() ->
+    ?assertEqual([], proper:module(?MODULE, [{to_file, user}, {numtests, 10000}])).
+any(Str) ->
+    lists:all(fun
+                  (Char) when ?ALLOWED_CHAR_GUARD(Char) orelse Char == $- ->
+                      true;
+                  (_) ->
+                      false
+              end,
+    Str).
+
+prop_allow_any_ascii() ->
+    ?FORALL(Str, string(), any(label(Str))).
+
 -endif.
 
 

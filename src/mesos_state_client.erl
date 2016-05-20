@@ -71,7 +71,7 @@ pid(_ParsedBody = #{pid := Pid}) ->
 is_slave(ParsedBody) ->
   #libprocess_pid{name = NameBin} = pid(ParsedBody),
   case binary:match(NameBin, [<<"slave">>]) of
-    [] ->
+    nomatch ->
       false;
     _ ->
       true
