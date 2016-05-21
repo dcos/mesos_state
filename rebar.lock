@@ -13,8 +13,4 @@
  {<<"proper">>,
   {git,"https://github.com/manopapad/proper",
        {ref,"6b562a2fb8a719cee5d99d7a93d5fe56c89a8824"}},
-  1},
- {<<"rec2json">>,
-  {git,"git://github.com/lordnull/rec2json",
-       {ref,"57c32229cd6b216808576b15829cc27487d08add"}},
-  0}].
+  1}].
