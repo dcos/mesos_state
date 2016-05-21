@@ -9,8 +9,4 @@
  {<<"lager">>,
   {git,"git://github.com/basho/lager",
        {ref,"45fe95ba6cd964b7a667394c4e671a5afe8f5a42"}},
-  0},
- {<<"proper">>,
-  {git,"https://github.com/manopapad/proper",
-       {ref,"6b562a2fb8a719cee5d99d7a93d5fe56c89a8824"}},
-  1}].
+  0}].
