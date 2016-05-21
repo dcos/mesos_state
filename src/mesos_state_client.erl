@@ -82,7 +82,7 @@ slave(Slave) ->
   #slave{
     slave_id = maps:get(id, Slave),
     hostname = maps:get(hostname, Slave),
-    pid = maps:get(pid, Slave)
+    pid = pid(Slave)
   }.
 slaves(ParsedBody) ->
   case is_slave(ParsedBody) of
