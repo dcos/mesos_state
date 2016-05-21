@@ -44,7 +44,12 @@ parse(Filename) ->
   ct:pal("Trying to parse: ~p", [Filename]),
   {ok, StateJson} = file:read_file(Filename),
   {ok, ParsedBody} = mesos_state_client:parse_response(StateJson),
-  mesos_state_client:tasks(ParsedBody).
+  case string:str(Filename, "empty.json") of
+    0 ->
+      true = [] =/= mesos_state_client:tasks(ParsedBody);
+    _ ->
+      true = [] == mesos_state_client:tasks(ParsedBody)
+  end.
 
 
 
