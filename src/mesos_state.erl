@@ -10,6 +10,7 @@
 -author("sdhillon").
 
 -include_lib("kernel/include/inet.hrl").
+-include("mesos_state.hrl").
 
 
 -ifdef(TEST).
@@ -23,6 +24,12 @@
 
 %% API
 -export([ip/0, domain_frag/1]).
+
+-export_type([task_state/0, framework_id/0, framework_name/0, task_id/0, executor_id/0, task_name/0, labels/0,
+    resource/0, resource_name/0, role/0, slave_id/0, hostname/0, protocol/0, mesos_port/0, ip_address/0,
+    network_infos/0, net_cls/0, container_status/0, task_status/0, docker/0, container/0, libprocess_pid/0,
+    slave/0, task/0
+]).
 
 -spec(ip() -> inet:ip4_address()).
 ip() ->
