@@ -101,6 +101,7 @@ find_slave(Id, Slaves) ->
       error
   end.
 
+-spec(tasks(mesos_agent_state()) -> [task()]).
 tasks(ParsedBody = #{frameworks := Frameworks, completed_frameworks := CompletedFrameworks}) ->
   Slaves = slaves(ParsedBody),
   Tasks1 = frameworks(Frameworks, Slaves, ParsedBody, []),
