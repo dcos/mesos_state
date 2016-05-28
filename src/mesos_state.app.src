@@ -6,7 +6,8 @@
    [kernel,
     stdlib,
     jsx,
-    lager
+    lager,
+    inets
    ]},
   {env,[]},
   {modules, []},
