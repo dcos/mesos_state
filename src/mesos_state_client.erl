@@ -132,7 +132,7 @@ tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
   case catch task(Task, Framework, Slave) of
     %% Don't bail on failed tasks
     {'EXIT', Reason} ->
-      lager:warning("Failed to parse task: ~p", [Reason]),
+      lager:error("Failed to parse task: ~p", [Reason]),
       tasks(Tasks, Framework, Slave, ParsedBody, TasksAcc);
     TaskRecord ->
       tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc])
@@ -184,6 +184,8 @@ resources(Resources) ->
   maps:map(fun resource/2, Resources).
 
 resource(cpus, Value) ->
+  Value;
+resource(gpus, Value) ->
   Value;
 resource(mem, Value) ->
   Value;
