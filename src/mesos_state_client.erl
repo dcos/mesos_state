@@ -193,7 +193,9 @@ resource(disk, Value) ->
   Value;
 resource(ports, PortsBin) ->
   PortsStr = binary_to_list(PortsBin),
-  range_to_resource(PortsStr).
+  range_to_resource(PortsStr);
+resource(_, Value) when is_number(Value) ->
+  Value.
 
 
 range_to_resource(String) ->

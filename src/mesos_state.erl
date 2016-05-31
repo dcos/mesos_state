@@ -133,8 +133,13 @@ remap_test() ->
     ?assertEqual("0-0", label("0-0")),
     ?assertEqual("a-----------------------------------------------b", "a-----------------------------------------------b").
 
-all_prop_test() ->
-    ?assertEqual([], proper:module(?MODULE, [{to_file, user}, {numtests, 100000}])).
+all_prop_test_() ->
+    {
+        timeout,
+        120,
+        [fun() -> [] = proper:module(?MODULE, [{to_file, user}, {numtests, 100000}]) end]
+    }.
+
 any(Str) ->
     lists:all(fun
                   (Char) when ?ALLOWED_CHAR_GUARD(Char) orelse Char == $- ->
