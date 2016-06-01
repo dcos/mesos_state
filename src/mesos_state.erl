@@ -23,7 +23,7 @@
 -define(ALLOWED_CHAR_GUARD(Char), (Char >= $a andalso Char =< $z) orelse (Char >= $0 andalso Char =< $9)).
 
 %% API
--export([ip/0, domain_frag/1]).
+-export([ip/0, domain_frag/1, label/1]).
 
 -export_type([task_state/0, framework_id/0, framework_name/0, task_id/0, executor_id/0, task_name/0, labels/0,
     resource/0, resource_name/0, role/0, slave_id/0, hostname/0, protocol/0, mesos_port/0, ip_address/0,
