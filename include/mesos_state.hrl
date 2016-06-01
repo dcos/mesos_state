@@ -72,10 +72,18 @@
 }).
 -type task_status() :: #task_status{}.
 
+-record(port_mapping, {
+  container_port :: inet:port_number(),
+  host_port :: inet:port_number(),
+  protocol :: protocol()
+}).
+-type port_mapping() :: #port_mapping{}.
+
 -record(docker, {
   force_pull_image :: boolean(),
   image :: binary(),
-  network :: 'bridge' | 'host'
+  network :: 'bridge' | 'host',
+  port_mappings :: [port_mapping()]
 }).
 -type docker() :: #docker{}.
 

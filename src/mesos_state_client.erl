@@ -241,11 +241,19 @@ container(undefined) ->
 container(#{docker := Docker, type := <<"DOCKER">>}) ->
   #container{type = docker, docker = docker(Docker)}.
 
+port_mapping(#{container_port := ContainerPort, host_port := HostPort, protocol := Protocol}) ->
+  #port_mapping{
+    protocol = protocol(Protocol),
+    host_port = HostPort,
+    container_port = ContainerPort
+  }.
 
-docker(_Docker = #{force_pull_image := ForcePullImage, image := Image, network := <<"BRIDGE">>}) ->
-  #docker{force_pull_image = ForcePullImage, image = Image, network = bridge};
+docker(_Docker =
+    #{force_pull_image := ForcePullImage, image := Image, network := <<"BRIDGE">>, port_mappings := PortMappings0}) ->
+  PortMappings1 = lists:map(fun port_mapping/1, PortMappings0),
+  #docker{force_pull_image = ForcePullImage, image = Image, network = bridge, port_mappings = PortMappings1};
 docker(_Docker = #{force_pull_image := ForcePullImage, image := Image, network := <<"HOST">>}) ->
-  #docker{force_pull_image = ForcePullImage, image = Image, network = host}.
+  #docker{force_pull_image = ForcePullImage, image = Image, network = host, port_mappings = []}.
 
 task_statuses([], Acc) ->
   Acc1 = lists:keysort(#task_status.timestamp, Acc),
