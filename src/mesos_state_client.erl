@@ -144,7 +144,11 @@ frameworks([Framework0 = #{executors := Executors, tasks := Tasks}|Frameworks], 
   frameworks(Frameworks, Slaves, ParsedBody, TasksAcc2);
 frameworks([Framework = #{executors := Executors}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
   TasksAcc1 = executors(Executors, Framework, Slaves, ParsedBody, TasksAcc),
+  frameworks(Frameworks, Slaves, ParsedBody, TasksAcc1);
+frameworks([Framework = #{tasks := Tasks}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
+  TasksAcc1 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc),
   frameworks(Frameworks, Slaves, ParsedBody, TasksAcc1).
+
 
 executors([], _Framework, _Slaves, _ParsedBody, Tasks) ->
   Tasks;
@@ -153,6 +157,14 @@ executors([_Executor = #{tasks := Tasks, completed_tasks := CompletedTasks}|Exec
   TasksAcc2 = tasks(CompletedTasks, Framework, Slaves, ParsedBody, TasksAcc1),
   executors(Executors, Framework, Slaves, ParsedBody, TasksAcc2).
 
+-ifdef(TEST).
+
+tasks([], _Framework, _Slave, _ParsedBody, TasksAcc) ->
+  TasksAcc;
+tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
+  TaskRecord = task(Task, Framework, Slave),
+  tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc]).
+-else.
 tasks([], _Framework, _Slave, _ParsedBody, TasksAcc) ->
   TasksAcc;
 tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
@@ -164,6 +176,7 @@ tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
     TaskRecord ->
       tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc])
   end.
+-endif.
 
 task(Task, Framework, Slaves) ->
   SlaveID = maps:get(slave_id, Task),
@@ -227,7 +240,7 @@ resource(_, Value) when is_number(Value) ->
 range_to_resource(String) ->
   String1 = string:strip(String, left, $[),
   String2 = string:strip(String1, right, $]),
-  Ranges = [range_to_resource2(Range) || Range <- string:tokens(String2, ",")],
+  Ranges = [range_to_resource2(Range) || Range <- string:tokens(String2, ", ")],
   lists:flatten(Ranges).
 
 range_to_resource2(Range) ->
@@ -272,6 +285,13 @@ task_status(_TaskStatus = #{timestamp := Timestamp, state := State, container_st
   #task_status{
     timestamp = Timestamp,
     container_status = container_status(ContainerStatus),
+    state = task_state(State),
+    healthy = undefined
+  };
+task_status(_TaskStatus = #{timestamp := Timestamp, state := State}) ->
+  #task_status{
+    timestamp = Timestamp,
+    container_status = undefined,
     state = task_state(State),
     healthy = undefined
   }.

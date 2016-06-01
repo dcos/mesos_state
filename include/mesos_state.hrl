@@ -65,7 +65,7 @@
 -type container_status() :: container_status().
 
 -record(task_status, {
-  container_status :: container_status(),
+  container_status :: container_status() | undefined,
   timestamp :: float(),
   state :: task_state(),
   healthy :: boolean() | undefined
