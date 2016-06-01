@@ -123,7 +123,6 @@
   statuses :: [task_status()],
   discovery :: undefined | discovery(),
   container :: undefined | container(),
-  framework_name :: framework_name(),
   slave :: slave(),
   framework :: framework()
   %% Should we add executor information
