@@ -14,11 +14,11 @@
 -include_lib("common_test/include/ct.hrl").
 
 %% API
--export([all/0, parse_json/1, parse_all/1]).
+-export([all/0, parse_json/1, parse_all/1, parse_master_json/1]).
 
 
 all() ->
-  [parse_json, parse_all].
+  [parse_json, parse_all, parse_master_json].
 
 parse_json(Config) ->
   DataDir = ?config(data_dir, Config),
@@ -32,6 +32,17 @@ parse_json(Config) ->
   #task{statuses = [#task_status{healthy = undefined}|_]} = UndefinedHealthTask,
   <<"e4c1a425-6478-4d51-99ae-5820fa6ffd3b-S0">> = mesos_state_client:id(ParsedBody),
   ok.
+
+parse_master_json(Config) ->
+  DataDir = ?config(data_dir, Config),
+  State3Json = filename:join(DataDir, "state3.json"),
+  {ok, State3JsonData} = file:read_file(State3Json),
+  {ok, ParsedBody} = mesos_state_client:parse_response(State3JsonData),
+  [#framework{
+    name = <<"marathon">>
+  }] = mesos_state_client:frameworks(ParsedBody),
+  3 = length(lists:usort(mesos_state_client:slaves(ParsedBody))),
+  ct:pal("Slaves: ~p", [mesos_state_client:slaves(ParsedBody)]).
 
 
 parse_all(Config) ->

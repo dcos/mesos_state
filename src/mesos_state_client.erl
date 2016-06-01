@@ -18,7 +18,7 @@
 
 
 %% API
--export([poll/0, poll/1, parse_response/1, flags/1, pid/1, tasks/1, id/1]).
+-export([poll/0, poll/1, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
 
 -spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll() ->
@@ -84,6 +84,8 @@ slave(Slave) ->
     hostname = maps:get(hostname, Slave),
     pid = pid(Slave)
   }.
+
+-spec(slaves(mesos_agent_state()) -> [slave()]).
 slaves(ParsedBody) ->
   case is_slave(ParsedBody) of
     false ->
@@ -101,6 +103,30 @@ find_slave(Id, Slaves) ->
       error
   end.
 
+
+%rg.listenerRecord(listener, ns)
+%rg.masterRecord(domain, masters, sj.Leader)
+-spec(frameworks(mesos_agent_state()) -> [framework()]).
+frameworks(_ParsedBody = #{frameworks := Frameworks}) ->
+  lists:map(fun framework/1, Frameworks).
+-spec(framework(map()) -> framework()).
+framework(Framework) ->
+  Pid =
+    case Framework of
+      #{pid := _} ->
+        pid(Framework);
+      _ ->
+        undefined
+    end,
+  #framework{
+    id =  maps:get(id, Framework),
+    name = maps:get(name, Framework),
+    pid = Pid,
+    hostname = maps:get(hostname, Framework),
+    webui_url = maps:get(webui_url, Framework, undefined)
+  }.
+
+
 -spec(tasks(mesos_agent_state()) -> [task()]).
 tasks(ParsedBody = #{frameworks := Frameworks, completed_frameworks := CompletedFrameworks}) ->
   Slaves = slaves(ParsedBody),
@@ -111,9 +137,10 @@ tasks(ParsedBody = #{frameworks := Frameworks, completed_frameworks := Completed
 frameworks([], _Slaves, _ParsedBody, TasksAcc) ->
   TasksAcc;
 
-frameworks([Framework = #{executors := Executors, tasks := Tasks}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
-  TasksAcc1 = executors(Executors, Framework, Slaves, ParsedBody, TasksAcc),
-  TasksAcc2 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc1),
+frameworks([Framework0 = #{executors := Executors, tasks := Tasks}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
+  Framework1 = framework(Framework0),
+  TasksAcc1 = executors(Executors, Framework1, Slaves, ParsedBody, TasksAcc),
+  TasksAcc2 = tasks(Tasks, Framework1, Slaves, ParsedBody, TasksAcc1),
   frameworks(Frameworks, Slaves, ParsedBody, TasksAcc2);
 frameworks([Framework = #{executors := Executors}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
   TasksAcc1 = executors(Executors, Framework, Slaves, ParsedBody, TasksAcc),
@@ -138,11 +165,10 @@ tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
       tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc])
   end.
 
-task(Task, _Framework = #{name := FrameworkName}, Slaves) ->
+task(Task, Framework, Slaves) ->
   SlaveID = maps:get(slave_id, Task),
   {ok, Slave} = find_slave(SlaveID, Slaves),
   #task{
-    framework_id = maps:get(framework_id, Task, ""),
     id = maps:get(id, Task),
     labels = task_labels(maps:get(labels, Task, [])),
     name = maps:get(name, Task),
@@ -152,8 +178,8 @@ task(Task, _Framework = #{name := FrameworkName}, Slaves) ->
     resources = resources(maps:get(resources, Task)),
     container = container(maps:get(container, Task, undefined)),
     discovery = discovery(maps:get(discovery, Task, undefined)),
-    framework_name = FrameworkName,
-    slave = Slave
+    slave = Slave,
+    framework = Framework
   }.
 
 task_labels(Labels) ->
