@@ -137,17 +137,16 @@ tasks(ParsedBody = #{frameworks := Frameworks, completed_frameworks := Completed
 frameworks([], _Slaves, _ParsedBody, TasksAcc) ->
   TasksAcc;
 
-frameworks([Framework0 = #{executors := Executors, tasks := Tasks}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
-  Framework1 = framework(Framework0),
-  TasksAcc1 = executors(Executors, Framework1, Slaves, ParsedBody, TasksAcc),
-  TasksAcc2 = tasks(Tasks, Framework1, Slaves, ParsedBody, TasksAcc1),
+frameworks([Framework = #{executors := Executors, tasks := Tasks}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
+  TasksAcc1 = executors(Executors, Framework, Slaves, ParsedBody, TasksAcc),
+  TasksAcc2 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc1),
   frameworks(Frameworks, Slaves, ParsedBody, TasksAcc2);
 frameworks([Framework = #{executors := Executors}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
   TasksAcc1 = executors(Executors, Framework, Slaves, ParsedBody, TasksAcc),
   frameworks(Frameworks, Slaves, ParsedBody, TasksAcc1);
 frameworks([Framework = #{tasks := Tasks}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
-  TasksAcc1 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc),
-  frameworks(Frameworks, Slaves, ParsedBody, TasksAcc1).
+  TaskAcc1 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc),
+  frameworks(Frameworks, Slaves, ParsedBody, TaskAcc1).
 
 
 executors([], _Framework, _Slaves, _ParsedBody, Tasks) ->
@@ -192,7 +191,7 @@ task(Task, Framework, Slaves) ->
     container = container(maps:get(container, Task, undefined)),
     discovery = discovery(maps:get(discovery, Task, undefined)),
     slave = Slave,
-    framework = Framework
+    framework = framework(Framework)
   }.
 
 task_labels(Labels) ->

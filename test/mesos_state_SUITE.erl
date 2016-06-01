@@ -41,8 +41,7 @@ parse_master_json(Config) ->
   [#framework{
     name = <<"marathon">>
   }] = mesos_state_client:frameworks(ParsedBody),
-  3 = length(lists:usort(mesos_state_client:slaves(ParsedBody))),
-  ct:pal("Slaves: ~p", [mesos_state_client:slaves(ParsedBody)]).
+  3 = length(lists:usort(mesos_state_client:slaves(ParsedBody))).
 
 
 parse_all(Config) ->
