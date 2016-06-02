@@ -30,7 +30,9 @@ poll(URI) ->
     {timeout, application:get_env(?APP, timeout, ?DEFAULT_TIMEOUT)},
     {connect_timeout, application:get_env(?APP, connect_timeout, ?DEFAULT_CONNECT_TIMEOUT)}
   ],
-  Headers = [{"Accept", "application/json"}],
+  {ok, Hostname} = inet:gethostname(),
+  UserAgent = lists:flatten(io_lib:format("Mesos-State / Host: ~s, Pid: ~s", [Hostname, os:getpid()])),
+  Headers = [{"Accept", "application/json"}, {"User-Agent", UserAgent}],
   Headers1 =
     case application:get_env(?APP, token) of
       undefined ->
@@ -154,7 +156,12 @@ executors([], _Framework, _Slaves, _ParsedBody, Tasks) ->
 executors([_Executor = #{tasks := Tasks, completed_tasks := CompletedTasks}|Executors], Framework, Slaves, ParsedBody, TasksAcc) ->
   TasksAcc1 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc),
   TasksAcc2 = tasks(CompletedTasks, Framework, Slaves, ParsedBody, TasksAcc1),
-  executors(Executors, Framework, Slaves, ParsedBody, TasksAcc2).
+  executors(Executors, Framework, Slaves, ParsedBody, TasksAcc2);
+executors([_Executor = #{tasks := Tasks}|Executors], Framework, Slaves, ParsedBody, TasksAcc) ->
+  TasksAcc1 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc),
+  executors(Executors, Framework, Slaves, ParsedBody, TasksAcc1);
+executors([_Executor|Executors], Framework, Slaves, ParsedBody, TasksAcc) ->
+  executors(Executors, Framework, Slaves, ParsedBody, TasksAcc).
 
 -ifdef(TEST).
 
