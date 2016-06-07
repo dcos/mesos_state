@@ -82,7 +82,7 @@
 -record(docker, {
   force_pull_image :: boolean(),
   image :: binary(),
-  network :: 'bridge' | 'host',
+  network :: 'bridge' | 'host' | 'user',
   port_mappings :: [port_mapping()]
 }).
 -type docker() :: #docker{}.

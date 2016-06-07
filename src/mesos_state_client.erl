@@ -267,10 +267,34 @@ port_mapping(#{container_port := ContainerPort, host_port := HostPort, protocol 
     container_port = ContainerPort
   }.
 
+docker(Docker = #{image := Image, network := NetworkType0})
+    when NetworkType0 == <<"BRIDGE">> orelse NetworkType0 == <<"USER">>->
+  PortMappings1 =
+    case Docker of
+      #{port_mappings := PortMappings0} ->
+        lists:map(fun port_mapping/1, PortMappings0);
+      _ ->
+        []
+    end,
+  NetworkType1 =
+    case NetworkType0 of
+      <<"USER">> ->
+        user;
+      <<"BRIDGE">> ->
+        bridge
+    end,
+  ForcePullImage =
+    case Docker of
+      #{force_pull_image := FPI} ->
+        FPI;
+      _ ->
+        false
+    end,
+  #docker{force_pull_image = ForcePullImage, image = Image, network = NetworkType1, port_mappings = PortMappings1};
 docker(_Docker =
-    #{force_pull_image := ForcePullImage, image := Image, network := <<"BRIDGE">>, port_mappings := PortMappings0}) ->
+  #{force_pull_image := ForcePullImage, image := Image, network := <<"USER">>, port_mappings := PortMappings0}) ->
   PortMappings1 = lists:map(fun port_mapping/1, PortMappings0),
-  #docker{force_pull_image = ForcePullImage, image = Image, network = bridge, port_mappings = PortMappings1};
+  #docker{force_pull_image = ForcePullImage, image = Image, network = user, port_mappings = PortMappings1};
 docker(_Docker = #{force_pull_image := ForcePullImage, image := Image, network := <<"HOST">>}) ->
   #docker{force_pull_image = ForcePullImage, image = Image, network = host, port_mappings = []}.
 
