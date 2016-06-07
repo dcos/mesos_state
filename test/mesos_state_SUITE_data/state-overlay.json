@@ -1,0 +1,1820 @@
+{
+    "activated_slaves": 2.0,
+    "build_date": "2016-05-27 18:54:01",
+    "build_time": 1464375241.0,
+    "build_user": "",
+    "cluster": "sargun-go-go-gadget-ccm",
+    "completed_frameworks": [
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "mesos": {
+                            "image": {
+                                "docker": {
+                                    "name": "sargun/ssh2:1"
+                                },
+                                "type": "DOCKER"
+                            }
+                        },
+                        "network_infos": [
+                            {
+                                "name": "m-overlay-1"
+                            }
+                        ],
+                        "type": "MESOS"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0001",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 1.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 128.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {},
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465312544.63267
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0001",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312531.50689,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465312544.64182,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "mesos": {
+                            "image": {
+                                "docker": {
+                                    "name": "sargun/ssh2:1"
+                                },
+                                "type": "DOCKER"
+                            }
+                        },
+                        "network_infos": [
+                            {
+                                "name": "m-overlay-1"
+                            }
+                        ],
+                        "type": "MESOS"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0002",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 1.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 128.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {},
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465312547.35892
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0002",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312544.24581,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465312547.3714,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "mesos": {
+                            "image": {
+                                "docker": {
+                                    "name": "sargun/ssh2:1"
+                                },
+                                "type": "DOCKER"
+                            }
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "MESOS"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0004",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 1.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 128.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S1",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {},
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465312712.82314
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0004",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312709.11472,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465312712.83575,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "mesos": {
+                            "image": {
+                                "docker": {
+                                    "name": "sargun/ssh2:1"
+                                },
+                                "type": "DOCKER"
+                            }
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "MESOS"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0003",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 1.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 128.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S1",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {},
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465312712.82338
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0003",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312703.72503,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465312712.83791,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:1",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0006",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 1.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 128.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_KILLED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.0.131",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.0.131"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.0.131"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465312820.11439
+                        },
+                        {
+                            "state": "TASK_KILLED",
+                            "timestamp": 1465312828.44631
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0006",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312819.14729,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465312828.44657,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:1",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0005",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 1.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 128.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_KILLED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.0.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.0.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.0.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465312797.40757
+                        },
+                        {
+                            "state": "TASK_KILLED",
+                            "timestamp": 1465312829.38193
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0005",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312779.79208,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465312829.38215,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0007",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312844.01232,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465312844.0173,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:1",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0008",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_KILLED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.0.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.0.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.0.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465312851.26852
+                        },
+                        {
+                            "state": "TASK_KILLED",
+                            "timestamp": 1465313009.51893
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0008",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312850.33792,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313009.51917,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:1",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0009",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S1",
+                    "state": "TASK_KILLED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.1.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.1.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.1.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465312873.38305
+                        },
+                        {
+                            "state": "TASK_KILLED",
+                            "timestamp": 1465313011.25489
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0009",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465312855.56499,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313011.25508,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:2",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0010",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_KILLED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.0.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.0.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.0.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465313028.26587
+                        },
+                        {
+                            "state": "TASK_KILLED",
+                            "timestamp": 1465313120.44082
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0010",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313027.32806,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313120.44104,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:2",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0011",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S1",
+                    "state": "TASK_KILLED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.1.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.1.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.1.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465313034.87696
+                        },
+                        {
+                            "state": "TASK_KILLED",
+                            "timestamp": 1465313125.78731
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0011",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313033.90872,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313125.78755,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:latest",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0012",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "10.0.0.67",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "10.0.0.67"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465313128.47058
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0012",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313124.99059,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313128.48146,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:latest",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0013",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "10.0.0.67",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "10.0.0.67"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465313132.89032
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0013",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313129.90986,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313132.9038,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:latest",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0014",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S1",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "10.0.3.135",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "10.0.3.135"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465313144.519
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0014",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313141.28808,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313144.5311,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:latest",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0015",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "10.0.0.67",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "10.0.0.67"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465313148.65774
+                        },
+                        {
+                            "state": "TASK_KILLED",
+                            "timestamp": 1465313148.66848
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0015",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313145.15933,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313148.66861,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:3",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0017",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S1",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.1.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.1.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.1.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465313234.66978
+                        },
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "10.0.3.135",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "10.0.3.135"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465313237.07892
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0017",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313224.28626,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313237.14893,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": false,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:3",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0016",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_FAILED",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.0.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.0.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.0.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465313232.17057
+                        },
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "10.0.0.67",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "10.0.0.67"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "state": "TASK_FAILED",
+                            "timestamp": 1465313246.22374
+                        }
+                    ]
+                }
+            ],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0016",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313218.76611,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "*",
+            "tasks": [],
+            "unregistered_time": 1465313246.30647,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "core",
+            "webui_url": ""
+        }
+    ],
+    "deactivated_slaves": 0.0,
+    "elected_time": 1465278954.69832,
+    "flags": {
+        "allocation_interval": "1secs",
+        "allocator": "HierarchicalDRF",
+        "authenticate": "false",
+        "authenticate_http": "false",
+        "authenticate_http_frameworks": "false",
+        "authenticate_slaves": "false",
+        "authenticators": "crammd5",
+        "authorizers": "local",
+        "cluster": "sargun-go-go-gadget-ccm",
+        "framework_sorter": "drf",
+        "help": "false",
+        "hostname_lookup": "false",
+        "http_authenticators": "basic",
+        "initialize_driver_logging": "true",
+        "ip_discovery_command": "/opt/mesosphere/bin/detect_ip",
+        "log_auto_initialize": "true",
+        "log_dir": "/var/log/mesos",
+        "logbufsecs": "0",
+        "logging_level": "INFO",
+        "max_completed_frameworks": "50",
+        "max_completed_tasks_per_framework": "1000",
+        "max_slave_ping_timeouts": "20",
+        "modules": "libraries {\n  file: \"/opt/mesosphere/active/mesos-overlay/lib/mesos/libmesos_network_overlay.so\"\n  modules {\n    name: \"com_mesosphere_mesos_OverlayMasterManager\"\n    parameters {\n      key: \"network_config\"\n      value: \"/opt/mesosphere/etc/dcos/network/overlay\"\n    }\n  }\n}\n",
+        "offer_timeout": "2mins",
+        "port": "5050",
+        "quiet": "false",
+        "quorum": "1",
+        "recovery_slave_removal_limit": "100%",
+        "registry": "replicated_log",
+        "registry_fetch_timeout": "1mins",
+        "registry_store_timeout": "1mins",
+        "registry_strict": "false",
+        "root_submissions": "true",
+        "slave_ping_timeout": "15secs",
+        "slave_removal_rate_limit": "1/20mins",
+        "slave_reregister_timeout": "10mins",
+        "user_sorter": "drf",
+        "version": "false",
+        "webui_dir": "/opt/mesosphere/packages/mesos--5b97ce16e25284914ae3776c2a6bbbfbda634a12/share/mesos/webui",
+        "weights": "",
+        "work_dir": "/var/lib/mesos/master",
+        "zk": "zk://127.0.0.1:2181/mesos",
+        "zk_session_timeout": "10secs"
+    },
+    "frameworks": [
+        {
+            "active": true,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0019",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313313.12938,
+            "resources": {
+                "cpus": 4.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 512.0
+            },
+            "role": "*",
+            "tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:3",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0019",
+                    "id": "dog",
+                    "name": "dog",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S1",
+                    "state": "TASK_RUNNING",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.1.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.1.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.1.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465313314.10876
+                        }
+                    ]
+                }
+            ],
+            "unregistered_time": 0.0,
+            "used_resources": {
+                "cpus": 4.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 512.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": true,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": false,
+            "completed_tasks": [],
+            "executors": [],
+            "failover_timeout": 0.0,
+            "hostname": "",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0018",
+            "name": "mesos-execute instance",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "registered_time": 1465313312.36084,
+            "resources": {
+                "cpus": 4.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 512.0
+            },
+            "role": "*",
+            "tasks": [
+                {
+                    "container": {
+                        "docker": {
+                            "image": "sargun/ssh2:3",
+                            "network": "USER",
+                            "privileged": false
+                        },
+                        "network_infos": [
+                            {
+                                "name": "overlay-1"
+                            }
+                        ],
+                        "type": "DOCKER"
+                    },
+                    "executor_id": "",
+                    "framework_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0018",
+                    "id": "cat",
+                    "name": "cat",
+                    "resources": {
+                        "cpus": 4.0,
+                        "disk": 0.0,
+                        "gpus": 0.0,
+                        "mem": 512.0
+                    },
+                    "slave_id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+                    "state": "TASK_RUNNING",
+                    "statuses": [
+                        {
+                            "container_status": {
+                                "network_infos": [
+                                    {
+                                        "ip_address": "44.128.0.130",
+                                        "ip_addresses": [
+                                            {
+                                                "ip_address": "44.128.0.130"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "labels": [
+                                {
+                                    "key": "Docker.NetworkSettings.IPAddress",
+                                    "value": "44.128.0.130"
+                                }
+                            ],
+                            "state": "TASK_RUNNING",
+                            "timestamp": 1465313313.33439
+                        }
+                    ]
+                }
+            ],
+            "unregistered_time": 0.0,
+            "used_resources": {
+                "cpus": 4.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 512.0
+            },
+            "user": "core",
+            "webui_url": ""
+        },
+        {
+            "active": true,
+            "capabilities": [
+                "TASK_KILLING_STATE"
+            ],
+            "checkpoint": true,
+            "completed_tasks": [],
+            "executors": [],
+            "failover_timeout": 604800.0,
+            "hostname": "10.0.4.86",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-0000",
+            "name": "marathon",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "offers": [],
+            "pid": "scheduler-c519c605-30b2-46eb-af0d-cd8d7d7b1921@10.0.4.86:32997",
+            "principal": "marathon",
+            "registered_time": 1465278959.49508,
+            "resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "role": "slave_public",
+            "tasks": [],
+            "unregistered_time": 0.0,
+            "used_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "user": "root",
+            "webui_url": "http://10.0.4.86:8080"
+        }
+    ],
+    "git_sha": "905391ea1c728287ee2b3b23d0fcae6bbafb3e37",
+    "hostname": "10.0.4.86",
+    "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005",
+    "leader": "master@10.0.4.86:5050",
+    "log_dir": "/var/log/mesos",
+    "orphan_tasks": [],
+    "pid": "master@10.0.4.86:5050",
+    "slaves": [
+        {
+            "active": true,
+            "attributes": {},
+            "hostname": "10.0.3.135",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S1",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "pid": "slave(1)@10.0.3.135:5051",
+            "registered_time": 1465312651.84617,
+            "reserved_resources": {},
+            "resources": {
+                "cpus": 4.0,
+                "disk": 35577.0,
+                "gpus": 0.0,
+                "mem": 14018.0,
+                "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+            },
+            "unreserved_resources": {
+                "cpus": 4.0,
+                "disk": 35577.0,
+                "gpus": 0.0,
+                "mem": 14018.0,
+                "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+            },
+            "used_resources": {
+                "cpus": 4.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 512.0
+            },
+            "version": "0.29.0"
+        },
+        {
+            "active": true,
+            "attributes": {},
+            "hostname": "10.0.0.67",
+            "id": "c13f319d-d1ba-4ecc-a2c2-cfe71f716005-S0",
+            "offered_resources": {
+                "cpus": 0.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 0.0
+            },
+            "pid": "slave(1)@10.0.0.67:5051",
+            "registered_time": 1465279001.84234,
+            "reserved_resources": {},
+            "resources": {
+                "cpus": 4.0,
+                "disk": 35577.0,
+                "gpus": 0.0,
+                "mem": 14018.0,
+                "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+            },
+            "unreserved_resources": {
+                "cpus": 4.0,
+                "disk": 35577.0,
+                "gpus": 0.0,
+                "mem": 14018.0,
+                "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+            },
+            "used_resources": {
+                "cpus": 4.0,
+                "disk": 0.0,
+                "gpus": 0.0,
+                "mem": 512.0
+            },
+            "version": "0.29.0"
+        }
+    ],
+    "start_time": 1465278954.69002,
+    "unregistered_frameworks": [],
+    "version": "0.29.0"
+}
