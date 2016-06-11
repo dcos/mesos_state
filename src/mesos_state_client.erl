@@ -18,7 +18,7 @@
 
 
 %% API
--export([poll/0, poll/1, parse_response/1, flags/1, pid/1, tasks/1, id/1]).
+-export([poll/0, poll/1, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
 
 -spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll() ->
@@ -30,7 +30,9 @@ poll(URI) ->
     {timeout, application:get_env(?APP, timeout, ?DEFAULT_TIMEOUT)},
     {connect_timeout, application:get_env(?APP, connect_timeout, ?DEFAULT_CONNECT_TIMEOUT)}
   ],
-  Headers = [{"Accept", "application/json"}],
+  {ok, Hostname} = inet:gethostname(),
+  UserAgent = lists:flatten(io_lib:format("Mesos-State / Host: ~s, Pid: ~s", [Hostname, os:getpid()])),
+  Headers = [{"Accept", "application/json"}, {"User-Agent", UserAgent}],
   Headers1 =
     case application:get_env(?APP, token) of
       undefined ->
@@ -84,6 +86,8 @@ slave(Slave) ->
     hostname = maps:get(hostname, Slave),
     pid = pid(Slave)
   }.
+
+-spec(slaves(mesos_agent_state()) -> [slave()]).
 slaves(ParsedBody) ->
   case is_slave(ParsedBody) of
     false ->
@@ -101,6 +105,30 @@ find_slave(Id, Slaves) ->
       error
   end.
 
+
+%rg.listenerRecord(listener, ns)
+%rg.masterRecord(domain, masters, sj.Leader)
+-spec(frameworks(mesos_agent_state()) -> [framework()]).
+frameworks(_ParsedBody = #{frameworks := Frameworks}) ->
+  lists:map(fun framework/1, Frameworks).
+-spec(framework(map()) -> framework()).
+framework(Framework) ->
+  Pid =
+    case Framework of
+      #{pid := _} ->
+        pid(Framework);
+      _ ->
+        undefined
+    end,
+  #framework{
+    id =  maps:get(id, Framework),
+    name = maps:get(name, Framework),
+    pid = Pid,
+    hostname = maps:get(hostname, Framework),
+    webui_url = maps:get(webui_url, Framework, undefined)
+  }.
+
+
 -spec(tasks(mesos_agent_state()) -> [task()]).
 tasks(ParsedBody = #{frameworks := Frameworks, completed_frameworks := CompletedFrameworks}) ->
   Slaves = slaves(ParsedBody),
@@ -117,32 +145,49 @@ frameworks([Framework = #{executors := Executors, tasks := Tasks}|Frameworks], S
   frameworks(Frameworks, Slaves, ParsedBody, TasksAcc2);
 frameworks([Framework = #{executors := Executors}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
   TasksAcc1 = executors(Executors, Framework, Slaves, ParsedBody, TasksAcc),
-  frameworks(Frameworks, Slaves, ParsedBody, TasksAcc1).
+  frameworks(Frameworks, Slaves, ParsedBody, TasksAcc1);
+frameworks([Framework = #{tasks := Tasks}|Frameworks], Slaves, ParsedBody, TasksAcc) ->
+  TaskAcc1 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc),
+  frameworks(Frameworks, Slaves, ParsedBody, TaskAcc1).
+
 
 executors([], _Framework, _Slaves, _ParsedBody, Tasks) ->
   Tasks;
 executors([_Executor = #{tasks := Tasks, completed_tasks := CompletedTasks}|Executors], Framework, Slaves, ParsedBody, TasksAcc) ->
   TasksAcc1 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc),
   TasksAcc2 = tasks(CompletedTasks, Framework, Slaves, ParsedBody, TasksAcc1),
-  executors(Executors, Framework, Slaves, ParsedBody, TasksAcc2).
+  executors(Executors, Framework, Slaves, ParsedBody, TasksAcc2);
+executors([_Executor = #{tasks := Tasks}|Executors], Framework, Slaves, ParsedBody, TasksAcc) ->
+  TasksAcc1 = tasks(Tasks, Framework, Slaves, ParsedBody, TasksAcc),
+  executors(Executors, Framework, Slaves, ParsedBody, TasksAcc1);
+executors([_Executor|Executors], Framework, Slaves, ParsedBody, TasksAcc) ->
+  executors(Executors, Framework, Slaves, ParsedBody, TasksAcc).
 
+-ifdef(TEST).
+
+tasks([], _Framework, _Slave, _ParsedBody, TasksAcc) ->
+  TasksAcc;
+tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
+  TaskRecord = task(Task, Framework, Slave),
+  tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc]).
+-else.
 tasks([], _Framework, _Slave, _ParsedBody, TasksAcc) ->
   TasksAcc;
 tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
   case catch task(Task, Framework, Slave) of
     %% Don't bail on failed tasks
     {'EXIT', Reason} ->
-      lager:warning("Failed to parse task: ~p", [Reason]),
+      lager:error("Failed to parse task: ~p", [Reason]),
       tasks(Tasks, Framework, Slave, ParsedBody, TasksAcc);
     TaskRecord ->
       tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc])
   end.
+-endif.
 
-task(Task, _Framework = #{name := FrameworkName}, Slaves) ->
+task(Task, Framework, Slaves) ->
   SlaveID = maps:get(slave_id, Task),
   {ok, Slave} = find_slave(SlaveID, Slaves),
   #task{
-    framework_id = maps:get(framework_id, Task, ""),
     id = maps:get(id, Task),
     labels = task_labels(maps:get(labels, Task, [])),
     name = maps:get(name, Task),
@@ -152,8 +197,8 @@ task(Task, _Framework = #{name := FrameworkName}, Slaves) ->
     resources = resources(maps:get(resources, Task)),
     container = container(maps:get(container, Task, undefined)),
     discovery = discovery(maps:get(discovery, Task, undefined)),
-    framework_name = FrameworkName,
-    slave = Slave
+    slave = Slave,
+    framework = framework(Framework)
   }.
 
 task_labels(Labels) ->
@@ -185,19 +230,23 @@ resources(Resources) ->
 
 resource(cpus, Value) ->
   Value;
+resource(gpus, Value) ->
+  Value;
 resource(mem, Value) ->
   Value;
 resource(disk, Value) ->
   Value;
 resource(ports, PortsBin) ->
   PortsStr = binary_to_list(PortsBin),
-  range_to_resource(PortsStr).
+  range_to_resource(PortsStr);
+resource(_, Value) when is_number(Value) ->
+  Value.
 
 
 range_to_resource(String) ->
   String1 = string:strip(String, left, $[),
   String2 = string:strip(String1, right, $]),
-  Ranges = [range_to_resource2(Range) || Range <- string:tokens(String2, ",")],
+  Ranges = [range_to_resource2(Range) || Range <- string:tokens(String2, ", ")],
   lists:flatten(Ranges).
 
 range_to_resource2(Range) ->
@@ -211,11 +260,43 @@ container(undefined) ->
 container(#{docker := Docker, type := <<"DOCKER">>}) ->
   #container{type = docker, docker = docker(Docker)}.
 
+port_mapping(#{container_port := ContainerPort, host_port := HostPort, protocol := Protocol}) ->
+  #port_mapping{
+    protocol = protocol(Protocol),
+    host_port = HostPort,
+    container_port = ContainerPort
+  }.
 
-docker(_Docker = #{force_pull_image := ForcePullImage, image := Image, network := <<"BRIDGE">>}) ->
-  #docker{force_pull_image = ForcePullImage, image = Image, network = bridge};
+docker(Docker = #{image := Image, network := NetworkType0})
+    when NetworkType0 == <<"BRIDGE">> orelse NetworkType0 == <<"USER">>->
+  PortMappings1 =
+    case Docker of
+      #{port_mappings := PortMappings0} ->
+        lists:map(fun port_mapping/1, PortMappings0);
+      _ ->
+        []
+    end,
+  NetworkType1 =
+    case NetworkType0 of
+      <<"USER">> ->
+        user;
+      <<"BRIDGE">> ->
+        bridge
+    end,
+  ForcePullImage =
+    case Docker of
+      #{force_pull_image := FPI} ->
+        FPI;
+      _ ->
+        false
+    end,
+  #docker{force_pull_image = ForcePullImage, image = Image, network = NetworkType1, port_mappings = PortMappings1};
+docker(_Docker =
+  #{force_pull_image := ForcePullImage, image := Image, network := <<"USER">>, port_mappings := PortMappings0}) ->
+  PortMappings1 = lists:map(fun port_mapping/1, PortMappings0),
+  #docker{force_pull_image = ForcePullImage, image = Image, network = user, port_mappings = PortMappings1};
 docker(_Docker = #{force_pull_image := ForcePullImage, image := Image, network := <<"HOST">>}) ->
-  #docker{force_pull_image = ForcePullImage, image = Image, network = host}.
+  #docker{force_pull_image = ForcePullImage, image = Image, network = host, port_mappings = []}.
 
 task_statuses([], Acc) ->
   Acc1 = lists:keysort(#task_status.timestamp, Acc),
@@ -234,6 +315,13 @@ task_status(_TaskStatus = #{timestamp := Timestamp, state := State, container_st
   #task_status{
     timestamp = Timestamp,
     container_status = container_status(ContainerStatus),
+    state = task_state(State),
+    healthy = undefined
+  };
+task_status(_TaskStatus = #{timestamp := Timestamp, state := State}) ->
+  #task_status{
+    timestamp = Timestamp,
+    container_status = undefined,
     state = task_state(State),
     healthy = undefined
   }.

@@ -23,7 +23,7 @@
 -define(ALLOWED_CHAR_GUARD(Char), (Char >= $a andalso Char =< $z) orelse (Char >= $0 andalso Char =< $9)).
 
 %% API
--export([ip/0, domain_frag/1]).
+-export([ip/0, domain_frag/1, label/1]).
 
 -export_type([task_state/0, framework_id/0, framework_name/0, task_id/0, executor_id/0, task_name/0, labels/0,
     resource/0, resource_name/0, role/0, slave_id/0, hostname/0, protocol/0, mesos_port/0, ip_address/0,
@@ -130,10 +130,16 @@ remap_test() ->
     ?assertEqual("4abc123", label("-4abc123")),
     ?assertEqual("fdgsf---gs7-fgs--d7fddg1234567890123456789012345678901234567891", label("$$fdgsf---gs7-fgs--d7fddg123456789012345678901234567890123456789-123")),
     ?assertEqual("89fdgsf---gs7-fgs--d7fddg", label("89fdgsf---gs7-fgs--d7fddg-")),
-    ?assertEqual("0-0", label("0-0")).
+    ?assertEqual("0-0", label("0-0")),
+    ?assertEqual("a-----------------------------------------------b", "a-----------------------------------------------b").
 
-all_prop_test() ->
-    ?assertEqual([], proper:module(?MODULE, [{to_file, user}, {numtests, 10000}])).
+all_prop_test_() ->
+    {
+        timeout,
+        120,
+        [fun() -> [] = proper:module(?MODULE, [{to_file, user}, {numtests, 100000}]) end]
+    }.
+
 any(Str) ->
     lists:all(fun
                   (Char) when ?ALLOWED_CHAR_GUARD(Char) orelse Char == $- ->

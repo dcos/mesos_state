@@ -65,17 +65,25 @@
 -type container_status() :: container_status().
 
 -record(task_status, {
-  container_status :: container_status(),
+  container_status :: container_status() | undefined,
   timestamp :: float(),
   state :: task_state(),
   healthy :: boolean() | undefined
 }).
 -type task_status() :: #task_status{}.
 
+-record(port_mapping, {
+  container_port :: inet:port_number(),
+  host_port :: inet:port_number(),
+  protocol :: protocol()
+}).
+-type port_mapping() :: #port_mapping{}.
+
 -record(docker, {
   force_pull_image :: boolean(),
   image :: binary(),
-  network :: 'bridge' | 'host'
+  network :: 'bridge' | 'host' | 'user',
+  port_mappings :: [port_mapping()]
 }).
 -type docker() :: #docker{}.
 
@@ -105,7 +113,6 @@
 
 
 -record(task, {
-  framework_id :: framework_id(),
   id :: task_id(),
   labels :: labels(),
   name :: task_name(),
@@ -116,13 +123,23 @@
   statuses :: [task_status()],
   discovery :: undefined | discovery(),
   container :: undefined | container(),
-  framework_name :: framework_name(),
-  slave :: slave()
+  slave :: slave(),
+  framework :: framework()
   %% Should we add executor information
   %% -executor name
   %% -executor id? (which is different than the executor id on
 }).
 
 -type task() :: #task{}.
+
+-record(framework, {
+  id :: framework_id(),
+  name :: framework_name(),
+  pid :: libprocess_pid() | undefined,
+  hostname :: hostname(),
+  webui_url :: binary() | undefined
+}).
+
+-type framework() :: #framework{}.
 
 
