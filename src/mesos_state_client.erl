@@ -20,9 +20,26 @@
 %% API
 -export([poll/0, poll/1, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
 
+proto() ->
+  case application:get_env(?APP, ssl, false) of
+    true ->
+      "https";
+    false ->
+      "http"
+  end.
+
+maybe_enable_ssl(Options) ->
+  case application:get_env(?APP, ssl, false) of
+    true ->
+      [{ssl, [{verify, verify_none}]}|Options];
+    false ->
+      Options
+  end.
+
 -spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll() ->
-  poll("http://localhost:5051/state").
+  Proto = proto(),
+  poll(Proto ++ "://localhost:5051/state").
 
 -spec(poll(URI :: string()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll(URI) ->
@@ -30,6 +47,7 @@ poll(URI) ->
     {timeout, application:get_env(?APP, timeout, ?DEFAULT_TIMEOUT)},
     {connect_timeout, application:get_env(?APP, connect_timeout, ?DEFAULT_CONNECT_TIMEOUT)}
   ],
+  Options1 = maybe_enable_ssl(Options),
   {ok, Hostname} = inet:gethostname(),
   UserAgent = lists:flatten(io_lib:format("Mesos-State / Host: ~s, Pid: ~s", [Hostname, os:getpid()])),
   Headers = [{"Accept", "application/json"}, {"User-Agent", UserAgent}],
@@ -40,7 +58,7 @@ poll(URI) ->
       {ok, Value} ->
         [{"Authorization", Value}|Headers]
     end,
-  Response = httpc:request(get, {URI, Headers1}, Options, [{body_format, binary}]),
+  Response = httpc:request(get, {URI, Headers1}, Options1, [{body_format, binary}]),
   handle_response(Response).
 
 handle_response({error, Reason}) ->
