@@ -11,6 +11,7 @@
 
 -include("mesos_state.hrl").
 -include("mesos_state_internal.hrl").
+-define(WHITESPACE, [<<" ">>, <<"\n">>, <<"\t">>, <<"\r">>]).
 -opaque mesos_agent_state() :: map().
 
 
@@ -20,6 +21,7 @@
 %% API
 -export([poll/0, poll/1, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
 
+-spec(proto() -> string()).
 proto() ->
   case application:get_env(?APP, ssl, false) of
     true ->
@@ -28,6 +30,7 @@ proto() ->
       "http"
   end.
 
+-spec(maybe_enable_ssl(list()) -> list()).
 maybe_enable_ssl(Options) ->
   case application:get_env(?APP, ssl, false) of
     true ->
@@ -35,6 +38,43 @@ maybe_enable_ssl(Options) ->
     false ->
       Options
   end.
+
+-spec(maybe_use_token(list()) -> list()).
+maybe_use_token(Headers) ->
+  FileToken = try_token_from_file(),
+  EnvToken = application:get_env(?APP, token),
+  case {FileToken, EnvToken} of
+    {{ok, Token}, _} ->
+      [{"Authorization", Token}|Headers];
+    {_, {ok, Token}} ->
+      [{"Authorization", Token}|Headers];
+    _ ->
+      Headers
+  end.
+
+-spec(try_token_from_file() -> {ok, string()} | undefined).
+try_token_from_file() ->
+  case application:get_env(?APP, ssl_token_file) of
+    undefined ->
+      undefined;
+    {ok, Path} ->
+      try_read_token_file(Path)
+  end.
+
+-spec(try_read_token_file(string()) -> {ok, string()} | undefined).
+try_read_token_file(Path) ->
+  case file:read_file(Path) of
+    {ok, Binary} ->
+      {ok, strip_token_binary(Binary)};
+    {error, Error} ->
+      lager:warning("unable to open configured token file ~p: ~p", [Path, Error]),
+      undefined
+  end.
+
+-spec(strip_token_binary(binary()) -> string()).
+strip_token_binary(Binary) ->
+  Stripped = binary:replace(Binary, ?WHITESPACE, <<>>, [global]),
+  binary_to_list(Stripped).
 
 -spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll() ->
@@ -51,13 +91,7 @@ poll(URI) ->
   {ok, Hostname} = inet:gethostname(),
   UserAgent = lists:flatten(io_lib:format("Mesos-State / Host: ~s, Pid: ~s", [Hostname, os:getpid()])),
   Headers = [{"Accept", "application/json"}, {"User-Agent", UserAgent}],
-  Headers1 =
-    case application:get_env(?APP, token) of
-      undefined ->
-        Headers;
-      {ok, Value} ->
-        [{"Authorization", Value}|Headers]
-    end,
+  Headers1 = maybe_use_token(Headers),
   Response = httpc:request(get, {URI, Headers1}, Options1, [{body_format, binary}]),
   handle_response(Response).
 
