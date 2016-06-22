@@ -73,7 +73,10 @@ try_read_token_file(Path) ->
 
 -spec(strip_token_binary(binary()) -> string()).
 strip_token_binary(Binary) ->
-  Stripped = binary:replace(Binary, ?WHITESPACE, <<>>, [global]),
+  Stripped = binary:replace(Binary,
+                            [<<"SERVICE_AUTH_TOKEN=">> | ?WHITESPACE],
+                            <<>>,
+                            [global]),
   binary_to_list(Stripped).
 
 -spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
