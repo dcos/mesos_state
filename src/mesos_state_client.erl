@@ -11,9 +11,15 @@
 
 -include("mesos_state.hrl").
 -include("mesos_state_internal.hrl").
--define(WHITESPACE, [<<" ">>, <<"\n">>, <<"\t">>, <<"\r">>]).
--opaque mesos_agent_state() :: map().
 
+-ifdef(TEST).
+-include_lib("proper/include/proper.hrl").
+-include_lib("eunit/include/eunit.hrl").
+-endif.
+
+-define(WHITESPACE, [<<" ">>, <<"\n">>, <<"\t">>, <<"\r">>]).
+
+-opaque mesos_agent_state() :: map().
 
 -export_type([mesos_agent_state/0]).
 
@@ -52,7 +58,7 @@ maybe_use_token(Headers) ->
       Headers
   end.
 
--spec(try_token_from_file() -> {ok, string()} | undefined).
+-spec(try_token_from_file() -> {ok, string()} | {error, no_token_parsed} | undefined).
 try_token_from_file() ->
   case application:get_env(?APP, ssl_token_file) of
     undefined ->
@@ -61,20 +67,34 @@ try_token_from_file() ->
       try_read_token_file(Path)
   end.
 
--spec(try_read_token_file(string()) -> {ok, string()} | undefined).
+-spec(try_read_token_file(string()) -> {ok, string()} | {error, no_token_parsed} | undefined).
 try_read_token_file(Path) ->
   case file:read_file(Path) of
     {ok, Binary} ->
-      {ok, strip_token_binary(Binary)};
+      parse_token(Binary);
     {error, Error} ->
       lager:warning("unable to open configured token file ~p: ~p", [Path, Error]),
       undefined
   end.
 
--spec(strip_token_binary(binary()) -> string()).
-strip_token_binary(Binary) ->
-  Stripped = binary:replace(Binary, ?WHITESPACE, <<>>, [global]),
-  binary_to_list(Stripped).
+-spec(parse_token(binary()) -> {ok, string()} | {error, no_token_parsed}).
+parse_token(<<>>) ->
+  Path = application:get_env(?APP, ssl_token_file, test_path),
+  lager:error("failed to parse auth token from configured file: ~p", [Path]),
+  {error, no_token_parsed};
+parse_token(B) ->
+  [B1 | Rest] = binary:split(B, <<"\n">>),
+  case {binary:split(B1, <<"=">>), Rest} of
+    {[<<"SERVICE_AUTH_TOKEN">>, B2], _} ->
+      Stripped = binary:replace(B2, ?WHITESPACE, <<>>, [global]),
+      TokenString = binary_to_list(Stripped),
+      {ok, TokenString};
+    {_, [Rest1]} ->
+      parse_token(Rest1);
+    _ ->
+      parse_token(<<>>)
+  end.
+
 
 -spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll() ->
@@ -458,13 +478,39 @@ protocol(<<"tcp">>) -> tcp;
 protocol(<<"udp">>) -> udp.
 
 
+-ifdef(TEST).
+proper_test() ->
+  [] = proper:module(?MODULE).
 
+good_token_line() ->
+  ?LET(Binary, binary(), "SERVICE_AUTH_TOKEN=" ++ binary_to_list(Binary) ++ "\n").
 
+bad_token_line() ->
+  ?LET(Binary, binary(), binary_to_list(Binary) ++ "\n").
 
+prop_valid_succeeds() ->
+  ?FORALL({Good, Bad},
+          {good_token_line(), list(bad_token_line())},
+          parses(list_to_binary(cat(randomize_list([Good | Bad]))))).
 
+prop_invalid_fails() ->
+  ?FORALL(Bad,
+          list(bad_token_line()),
+          doesnt_parse(list_to_binary(cat(randomize_list(Bad))))).
 
+parses(Binary) ->
+  case parse_token(Binary) of
+    {ok, _T} -> true;
+    _ -> false
+  end.
 
+doesnt_parse(Binary) ->
+  not parses(Binary).
 
+cat(List) ->
+  lists:foldl(fun (E, Acc) -> E ++ Acc end, [], List).
 
+randomize_list(L) ->
+  [X || {_, X} <- lists:sort([{random:uniform(), N} || N <- L])].
 
-
+-endif.
