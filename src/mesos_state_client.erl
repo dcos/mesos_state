@@ -52,7 +52,7 @@ maybe_use_token(Headers) ->
       Headers
   end.
 
--spec(try_token_from_file() -> {ok, string()} | undefined).
+-spec(try_token_from_file() -> {ok, string()} | {error, no_token_parsed} | undefined).
 try_token_from_file() ->
   case application:get_env(?APP, ssl_token_file) of
     undefined ->
@@ -61,23 +61,34 @@ try_token_from_file() ->
       try_read_token_file(Path)
   end.
 
--spec(try_read_token_file(string()) -> {ok, string()} | undefined).
+-spec(try_read_token_file(string()) -> {ok, string()} | {error, no_token_parsed} | undefined).
 try_read_token_file(Path) ->
   case file:read_file(Path) of
     {ok, Binary} ->
-      {ok, strip_token_binary(Binary)};
+      parse_token(Binary);
     {error, Error} ->
       lager:warning("unable to open configured token file ~p: ~p", [Path, Error]),
       undefined
   end.
 
--spec(strip_token_binary(binary()) -> string()).
-strip_token_binary(Binary) ->
-  Stripped = binary:replace(Binary,
-                            [<<"SERVICE_AUTH_TOKEN=">> | ?WHITESPACE],
-                            <<>>,
-                            [global]),
-  binary_to_list(Stripped).
+-spec(parse_token(binary()) -> {ok, string()} | {error, no_token_parsed}).
+parse_token(<<>>) ->
+  {ok, Path} = application:get_env(?APP, ssl_token_file),
+  lager:error("failed to parse auth token from configured file: ~p", [Path]),
+  {error, no_token_parsed};
+parse_token(B) ->
+  [B1 | Rest] = binary:split(B, <<"\n">>),
+  case {binary:split(B1, <<"=">>), Rest} of
+    {[<<"SERVICE_AUTH_TOKEN">>, B2], _} ->
+      Stripped = binary:replace(B2, ?WHITESPACE, <<>>, [global]),
+      TokenString = binary_to_list(Stripped),
+      {ok, TokenString};
+    {_, [Rest1]} ->
+      parse_token(Rest1);
+    _ ->
+      parse_token(<<>>)
+  end.
+
 
 -spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll() ->
