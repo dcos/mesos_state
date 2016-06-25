@@ -51,9 +51,9 @@ maybe_use_token(Headers) ->
   EnvToken = application:get_env(?APP, token),
   case {FileToken, EnvToken} of
     {{ok, Token}, _} ->
-      [{"Authorization", Token}|Headers];
+      [{"Authorization", "token=" ++ Token}|Headers];
     {_, {ok, Token}} ->
-      [{"Authorization", Token}|Headers];
+      [{"Authorization", "token=" ++ Token}|Headers];
     _ ->
       Headers
   end.
