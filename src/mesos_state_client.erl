@@ -441,38 +441,5 @@ protocol(<<"udp">>) -> udp.
 
 
 -ifdef(TEST).
-proper_test() ->
-  [] = proper:module(?MODULE).
-
-good_token_line() ->
-  ?LET(Binary, binary(), "SERVICE_AUTH_TOKEN=" ++ binary_to_list(Binary) ++ "\n").
-
-bad_token_line() ->
-  ?LET(Binary, binary(), binary_to_list(Binary) ++ "\n").
-
-prop_valid_succeeds() ->
-  ?FORALL({Good, Bad},
-          {good_token_line(), list(bad_token_line())},
-          parses(list_to_binary(cat(randomize_list([Good | Bad]))))).
-
-prop_invalid_fails() ->
-  ?FORALL(Bad,
-          list(bad_token_line()),
-          doesnt_parse(list_to_binary(cat(randomize_list(Bad))))).
-
-parses(Binary) ->
-  case parse_token(Binary) of
-    {ok, _T} -> true;
-    _ -> false
-  end.
-
-doesnt_parse(Binary) ->
-  not parses(Binary).
-
-cat(List) ->
-  lists:foldl(fun (E, Acc) -> E ++ Acc end, [], List).
-
-randomize_list(L) ->
-  [X || {_, X} <- lists:sort([{random:uniform(), N} || N <- L])].
 
 -endif.
