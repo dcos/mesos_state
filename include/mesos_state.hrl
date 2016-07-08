@@ -60,7 +60,7 @@
 
 -record(container_status, {
   network_infos :: [network_infos()],
-  cgroup_info :: cgroup_info()
+  cgroup_info :: cgroup_info() | undefined
 }).
 -type container_status() :: container_status().
 
