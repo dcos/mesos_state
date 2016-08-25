@@ -88,8 +88,8 @@
 -type docker() :: #docker{}.
 
 -record(container, {
-  docker :: docker(),
-  type :: 'docker'
+  docker :: docker() | undefined,
+  type :: 'docker' | 'mesos'
 }).
 -type container() :: #container{}.
 

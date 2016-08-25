@@ -292,7 +292,12 @@ range_to_resource2(Range) ->
 container(undefined) ->
   undefined;
 container(#{docker := Docker, type := <<"DOCKER">>}) ->
-  #container{type = docker, docker = docker(Docker)}.
+  #container{type = docker, docker = docker(Docker)};
+container(#{type := <<"MESOS">>}) ->
+    #container{type = mesos}.
+
+port_mappings(#{port_mappings := PortMappings}) -> [ port_mapping(PM) || PM <- PortMappings ];
+port_mappings(_) -> [].
 
 port_mapping(#{container_port := ContainerPort, host_port := HostPort, protocol := Protocol}) ->
   #port_mapping{
@@ -301,36 +306,15 @@ port_mapping(#{container_port := ContainerPort, host_port := HostPort, protocol 
     container_port = ContainerPort
   }.
 
-docker(Docker = #{image := Image, network := NetworkType0})
-    when NetworkType0 == <<"BRIDGE">> orelse NetworkType0 == <<"USER">>->
-  PortMappings1 =
-    case Docker of
-      #{port_mappings := PortMappings0} ->
-        lists:map(fun port_mapping/1, PortMappings0);
-      _ ->
-        []
-    end,
-  NetworkType1 =
-    case NetworkType0 of
-      <<"USER">> ->
-        user;
-      <<"BRIDGE">> ->
-        bridge
-    end,
-  ForcePullImage =
-    case Docker of
-      #{force_pull_image := FPI} ->
-        FPI;
-      _ ->
-        false
-    end,
-  #docker{force_pull_image = ForcePullImage, image = Image, network = NetworkType1, port_mappings = PortMappings1};
-docker(_Docker =
-  #{force_pull_image := ForcePullImage, image := Image, network := <<"USER">>, port_mappings := PortMappings0}) ->
-  PortMappings1 = lists:map(fun port_mapping/1, PortMappings0),
-  #docker{force_pull_image = ForcePullImage, image = Image, network = user, port_mappings = PortMappings1};
-docker(_Docker = #{force_pull_image := ForcePullImage, image := Image, network := <<"HOST">>}) ->
-  #docker{force_pull_image = ForcePullImage, image = Image, network = host, port_mappings = []}.
+force_pull_image(#{force_pull_image := ForcePullImage}) -> ForcePullImage;
+force_pull_image(_) -> false.
+
+docker(#{image := Image, network := Network} = Docker) ->
+    #docker{
+       force_pull_image = force_pull_image(Docker),
+       image = Image,
+       network = list_to_existing_atom(string:to_lower(binary_to_list(Network))),
+       port_mappings = port_mappings(Docker)}.
 
 task_statuses([], Acc) ->
   Acc1 = lists:keysort(#task_status.timestamp, Acc),
@@ -413,17 +397,19 @@ discovery(Discovery) ->
 
 
 discovery_ports([], Acc) ->
-  Acc;
+    Acc;
+%% Skip "client" protocol re: https://github.com/mesosphere/etcd-mesos/blob/master/scheduler/scheduler.go#L977
+discovery_ports([#{protocol := <<"client">>}|RestPorts], Acc) ->
+    discovery_ports(RestPorts, Acc);
 discovery_ports([Port = #{number := Number, protocol := Protocol}|RestPorts],
-    Acc) ->
-  PortRecord =
-  #mesos_port{
-    name = maps:get(name, Port, undefined),
-    number = Number,
-    protocol = protocol(Protocol),
-    labels = port_labels(Port)
-  },
-  discovery_ports(RestPorts, [PortRecord|Acc]).
+                Acc) ->
+    PortRecord = #mesos_port{
+       name = maps:get(name, Port, undefined),
+       number = Number,
+       protocol = protocol(Protocol),
+       labels = port_labels(Port)
+      },
+    discovery_ports(RestPorts, [PortRecord|Acc]).
 
 port_labels(_Port = #{labels := #{labels := Labels}}) ->
   Proplist = [{Key, Value} || #{key := Key, value := Value} <- Labels],
