@@ -63,12 +63,7 @@ poll() ->
   Proto = proto(),
   poll(Proto ++ "://localhost:5051/state").
 
--spec(poll(string() | inet:ip_address()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
-poll(IP) when is_tuple(IP) ->
-  Proto = proto(),
-  IPStr = inet:ntoa(IP),
-  URI = lists:flatten(Proto ++ "://" ++ IPStr ++ "/state"),
-  poll(URI);
+-spec(poll(URI :: string()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll(URI) ->
   Options = [
     {timeout, application:get_env(?APP, timeout, ?DEFAULT_TIMEOUT)},
