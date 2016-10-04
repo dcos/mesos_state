@@ -25,7 +25,7 @@
 
 
 %% API
--export([poll/0, poll/1, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
+-export([poll/0, poll/1, poll/2, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
 
 -spec(proto() -> string()).
 proto() ->
@@ -63,7 +63,15 @@ poll() ->
   Proto = proto(),
   poll(Proto ++ "://localhost:5051/state").
 
--spec(poll(URI :: string()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
+-spec(poll(inet:ip_address(), inet:port_number()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
+poll(IP, Port) when is_tuple(IP) andalso is_number(Port) ->
+  Proto = proto(),
+  IPStr = inet:ntoa(IP),
+  PortStr = integer_to_list(Port),
+  URI = lists:flatten(Proto ++ "://" ++ IPStr ++ ":" ++ PortStr ++ "/state"),
+  poll(URI).
+
+-spec(poll(string()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll(URI) ->
   Options = [
     {timeout, application:get_env(?APP, timeout, ?DEFAULT_TIMEOUT)},
