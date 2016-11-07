@@ -1,6 +1,6 @@
 machine:
   environment:
-    PATH: ${HOME}/extras/bin:${HOME}/extras/otp/19.0/bin:${PATH}
+    PATH: ${HOME}/extras/bin:${HOME}/extras/otp/19.1/bin:${PATH}
 dependencies:
   cache_directories:
     - ~/extras
@@ -12,7 +12,7 @@ dependencies:
     - ~/.cache
   pre:
     - curl -O -L https://raw.githubusercontent.com/yrashk/kerl/master/kerl && chmod 755 kerl
-    - if [ ! -d ~/extras/otp/19.0 ]; then ./kerl build 19.0 19.0; ./kerl install 19.0 ~/extras/otp/19.0; fi:
+    - if [ ! -d ~/extras/otp/19.1 ]; then ./kerl build 19.1 19.1; ./kerl install 19.1 ~/extras/otp/19.1; fi:
         timeout: 1800
     - ./rebar3 update
     - sudo service mongodb stop
@@ -29,11 +29,11 @@ dependencies:
 
 test:
   override:
-    - make xref
-    - make eunit
-    - make ct
-    - make dialyzer
-    - make lint
+    - make check
   post:
+    - ./rebar3 covertool generate
+    - sudo pip install codecov
     - mkdir -p $CIRCLE_TEST_REPORTS/
     - mv TEST-*.xml $CIRCLE_TEST_REPORTS
+    - codecov -X gcov -f _build/test/covertool/mesos_state.covertool.xml
+    - cp -r _build/test/cover $CIRCLE_TEST_REPORTS
