@@ -1,4 +1,4 @@
-PACKAGE         ?= spartan
+PACKAGE         ?= mesos_state
 VERSION         ?= $(shell git describe --tags)
 BASE_DIR         = $(shell pwd)
 ERLANG_BIN       = $(shell dirname $(shell which erl))
