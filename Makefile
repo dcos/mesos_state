@@ -14,9 +14,11 @@ all: compile
 ##
 
 compile:
+	$(REBAR) protobuf compile
 	$(REBAR) compile
 
 clean:
+	$(REBAR) protobuf clean
 	$(REBAR) clean
 
 ##
