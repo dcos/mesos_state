@@ -430,9 +430,12 @@ ports_from_discovery(#{ports := #{ports := Ports}}) ->
 ports_from_discovery(_) ->
   [].
 
-protocol(<<"tcp">>) -> tcp;
-protocol(<<"udp">>) -> udp.
-
+protocol(BinString) when is_binary(BinString) ->
+    String = binary_to_list(BinString),
+    case string:to_lower(String) of
+        "tcp" -> tcp;
+        "udp" -> udp
+    end.
 
 -ifdef(TEST).
 
