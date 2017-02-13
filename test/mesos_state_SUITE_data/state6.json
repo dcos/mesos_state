@@ -4774,7 +4774,7 @@
                         "docker": {
                             "force_pull_image": true,
                             "image": "calico/calico-dcos:v0.1.0",
-                            "network": "HOST",
+                            "network": "BRIDGE",
                             "privileged": false
                         },
                         "type": "DOCKER"
