@@ -317,11 +317,19 @@ port_mapping(#{container_port := ContainerPort, host_port := HostPort, protocol 
 force_pull_image(#{force_pull_image := ForcePullImage}) -> ForcePullImage;
 force_pull_image(_) -> false.
 
+network_type(BinString) when is_binary(BinString) ->
+    String = binary_to_list(BinString),
+    case string:to_lower(String) of
+        "bridge" -> 'bridge';
+        "host" -> 'host';
+        "user" -> 'user'
+    end.
+
 docker(#{image := Image, network := Network} = Docker) ->
     #docker{
        force_pull_image = force_pull_image(Docker),
        image = Image,
-       network = list_to_existing_atom(string:to_lower(binary_to_list(Network))),
+       network = network_type(Network),
        port_mappings = port_mappings(Docker)}.
 
 task_statuses([], Acc) ->
