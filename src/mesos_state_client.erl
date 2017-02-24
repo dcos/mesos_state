@@ -370,6 +370,11 @@ container_status(_ContainerStatus = #{network_infos := NetworkInfos}) ->
   #container_status{
     cgroup_info = undefined,
     network_infos = network_infos(NetworkInfos, [])
+  };
+container_status(_) ->
+  #container_status{
+    cgroup_info = undefined,
+    network_infos = []
   }.
 
 cgroup_info(#{net_cls := #{classid := ClassID}}) ->
