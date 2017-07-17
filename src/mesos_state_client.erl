@@ -301,8 +301,12 @@ container(undefined) ->
   undefined;
 container(#{docker := Docker, type := <<"DOCKER">>}) ->
   #container{type = docker, docker = docker(Docker)};
-container(#{type := <<"MESOS">>}) ->
-    #container{type = mesos}.
+container(#{type := <<"MESOS">>} = Mesos) ->
+  #container{type = mesos, network_infos = network_infos(Mesos)}.
+
+network_infos(#{network_infos := [NetworkInfo|_]}) -> 
+  #network_info{port_mappings = port_mappings(NetworkInfo)};
+network_infos(_) -> [].
 
 port_mappings(#{port_mappings := PortMappings}) -> [ port_mapping(PM) || PM <- PortMappings ];
 port_mappings(_) -> [].
