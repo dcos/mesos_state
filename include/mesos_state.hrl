@@ -44,7 +44,8 @@
 -type ip_address() :: #ip_address{}.
 
 -record(network_info, {
-  ip_addresses :: [ip_address()]
+  ip_addresses :: [ip_address()] | undefined,
+  port_mappings :: [port_mapping()] | undefined
 }).
 -type network_infos() :: #network_info{}.
 
@@ -88,11 +89,11 @@
 -type docker() :: #docker{}.
 
 -record(container, {
+  type :: 'docker' | 'mesos',
   docker :: docker() | undefined,
-  type :: 'docker' | 'mesos'
+  network_infos :: [network_infos()] | undefined 
 }).
 -type container() :: #container{}.
-
 
 -record(libprocess_pid, {
   name :: binary(),
