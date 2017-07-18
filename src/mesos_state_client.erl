@@ -304,8 +304,8 @@ container(#{docker := Docker, type := <<"DOCKER">>}) ->
 container(#{type := <<"MESOS">>} = Mesos) ->
   #container{type = mesos, network_infos = network_infos(Mesos)}.
 
-network_infos(#{network_infos := [NetworkInfo|_]}) -> 
-  #network_info{port_mappings = port_mappings(NetworkInfo)};
+network_infos(#{network_infos := NetworkInfos}) -> 
+  [#network_info{port_mappings = port_mappings(NI)} || NI <- NetworkInfos];
 network_infos(_) -> [].
 
 port_mappings(#{port_mappings := PortMappings}) -> [ port_mapping(PM) || PM <- PortMappings ];
