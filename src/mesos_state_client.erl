@@ -94,9 +94,20 @@ handle_response({ok, {StatusLine, _Headers, _Body}}) ->
 
 -spec(parse_response(Body :: binary()) -> {ok, mesos_agent_state()}).
 parse_response(Body) ->
+  ParsedBody = jiffy:decode(Body, [return_maps]),
   %% The labels should be relatively tiny -- just let them be atoms
-  ParsedBody = jsx:decode(Body, [return_maps, {labels, atom}]),
-  parse_response2(ParsedBody).
+  ParsedBody0 = atom_labels(ParsedBody),
+  parse_response2(ParsedBody0).
+
+-spec atom_labels(jiffy:json_value()) -> jiffy:json_value().
+atom_labels(Term) when is_map(Term) ->
+  maps:fold(fun (Key, Value, Acc) ->
+    Acc#{binary_to_atom(Key, latin1) => atom_labels(Value)}
+  end, #{}, Term);
+atom_labels(Term) when is_list(Term) ->
+  lists:map(fun atom_labels/1, Term);
+atom_labels(Term) ->
+  Term.
 
 parse_response2(ParsedBody) ->
   {ok, ParsedBody}.

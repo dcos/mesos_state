@@ -1,17 +1,12 @@
-[{<<"eper">>,
-  {git,"https://github.com/massemanet/eper.git",
-       {ref,"1742031e12fb9e6eac0ffacfc593d5a7849fc07f"}},
-  0},
- {<<"goldrush">>,
-  {git,"git://github.com/DeadZen/goldrush.git",
-       {ref,"212299233c7e7eb63a97be2777e1c05ebaa58dbe"}},
-  1},
- {<<"gpb">>,{pkg,<<"gpb">>,<<"3.26.4">>},0},
- {<<"jsx">>,
-  {git,"https://github.com/talentdeficit/jsx.git",
-       {ref,"3074d4865b3385a050badf7828ad31490d860df5"}},
-  0},
- {<<"lager">>,
-  {git,"https://github.com/basho/lager.git",
-       {ref,"8187757388c9adc915379caaab36a2f2ca26e944"}},
-  0}].
+{"1.1.0",
+[{<<"goldrush">>,{pkg,<<"goldrush">>,<<"0.1.9">>},1},
+ {<<"gpb">>,{pkg,<<"gpb">>,<<"3.27.4">>},0},
+ {<<"jiffy">>,{pkg,<<"jiffy">>,<<"0.14.11">>},0},
+ {<<"lager">>,{pkg,<<"lager">>,<<"3.5.1">>},0}]}.
+[
+{pkg_hash,[
+ {<<"goldrush">>, <<"F06E5D5F1277DA5C413E84D5A2924174182FB108DABB39D5EC548B27424CD106">>},
+ {<<"gpb">>, <<"0BE08756A64A4A9F4E74E6E50ACE568CAD2577F52A9EB9D5985AA7A7E5D73BCB">>},
+ {<<"jiffy">>, <<"919A87D491C5A6B5E3BBC27FAFEDC3A0761CA0B4C405394F121F582FD4E3F0E5">>},
+ {<<"lager">>, <<"63897A61AF646C59BB928FEE9756CE8BDD02D5A1A2F3551D4A5E38386C2CC071">>}]}
+].
