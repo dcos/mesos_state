@@ -39,7 +39,7 @@
 -type discovery() :: #discovery{}.
 
 -record(ip_address, {
-  ip_address :: inet:ip4_address()
+  ip_address :: inet:ip_address()
 }).
 -type ip_address() :: #ip_address{}.
 
@@ -97,7 +97,7 @@
 
 -record(libprocess_pid, {
   name :: binary(),
-  ip :: inet:ip4_address(),
+  ip :: inet:ip_address(),
   port :: non_neg_integer()
 }).
 

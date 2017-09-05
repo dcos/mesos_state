@@ -410,7 +410,7 @@ ip_addresses([], Acc) ->
   Acc;
 ip_addresses([#{ip_address := IPAddressBin}|Rest], Acc) ->
   IPAddressStr = binary_to_list(IPAddressBin),
-  case inet:parse_ipv4_address(IPAddressStr) of
+  case inet:parse_address(IPAddressStr) of
     {ok, IP} ->
       ip_addresses(Rest, [#ip_address{ip_address = IP}|Acc]);
     %% Raise this error somehow?
