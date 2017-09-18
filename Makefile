@@ -1,11 +1,4 @@
-PACKAGE         ?= mesos_state
-VERSION         ?= $(shell git describe --tags)
-BASE_DIR         = $(shell pwd)
-ERLANG_BIN       = $(shell dirname $(shell which erl))
-REBAR            = $(shell pwd)/rebar3
-MAKE						 = make
-
-.PHONY: rel deps test eqc
+.PHONY: test
 
 all: compile
 
@@ -14,46 +7,27 @@ all: compile
 ##
 
 compile:
-	$(REBAR) protobuf compile
-	$(REBAR) compile
+	./rebar3 compile
 
 clean:
-	$(REBAR) protobuf clean
-	$(REBAR) clean
+	./rebar3 clean
 
 ##
 ## Test targets
 ##
 
-check: test xref dialyzer lint
+check: test xref dialyzer
 
 test: ct eunit
 
-lint:
-	${REBAR} as lint lint
-
-eqc:
-	${REBAR} as test eqc
-
 eunit:
-	${REBAR} as test eunit
+	./rebar3 eunit -v
 
 ct:
-	${REBAR} as test ct -v
+	./rebar3 ct -v
 
-##
-## Release targets
-##
+dialyzer:
+	./rebar3 dialyzer
 
-rel:
-	${REBAR} as prod release
-
-stage:
-	${REBAR} release -d
-
-shell:
-	${REBAR} shell --apps spartan
-
-DIALYZER_APPS = kernel stdlib erts sasl eunit syntax_tools compiler crypto
-
-include tools.mk
+xref:
+	./rebar3 xref
