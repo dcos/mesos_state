@@ -316,18 +316,8 @@ container(#{type := <<"MESOS">>} = Mesos) ->
   #container{type = mesos, network_infos = network_infos(Mesos)}.
 
 network_infos(#{network_infos := NetworkInfos}) -> 
-  [#network_info{port_mappings = port_mappings(NI)} || NI <- NetworkInfos];
+  network_infos(NetworkInfos, []);
 network_infos(_) -> [].
-
-port_mappings(#{port_mappings := PortMappings}) -> [ port_mapping(PM) || PM <- PortMappings ];
-port_mappings(_) -> [].
-
-port_mapping(#{container_port := ContainerPort, host_port := HostPort, protocol := Protocol}) ->
-  #port_mapping{
-    protocol = protocol(Protocol),
-    host_port = HostPort,
-    container_port = ContainerPort
-  }.
 
 force_pull_image(#{force_pull_image := ForcePullImage}) -> ForcePullImage;
 force_pull_image(_) -> false.
@@ -395,16 +385,20 @@ container_status(_) ->
 cgroup_info(#{net_cls := #{classid := ClassID}}) ->
   #cgroup_info{net_cls = #net_cls{classid = ClassID}}.
 
-
 network_infos([], Acc) ->
   Acc;
+network_infos([#{ip_addresses := IPAddresses, port_mappings := PortMappings}|Rest], Acc) ->
+  NetworkInfo1 = #network_info{ip_addresses = ip_addresses(IPAddresses, []),
+                               port_mappings = port_mappings(PortMappings, [])},
+  network_infos(Rest, [NetworkInfo1|Acc]);
 network_infos([#{ip_addresses := IPAddresses}|Rest], Acc) ->
   NetworkInfo1 = #network_info{ip_addresses = ip_addresses(IPAddresses, [])},
   network_infos(Rest, [NetworkInfo1|Acc]);
-%% We have no ip_addresses
-network_infos(IPAddresses = [#{ip_address := _IPAddress}], []) ->
-  NetworkInfo = #network_info{ip_addresses = ip_addresses(IPAddresses, [])},
-  [NetworkInfo].
+network_infos([#{port_mappings := PortMappings}|Rest], Acc) ->
+  NetworkInfo1 = #network_info{ip_addresses = [], port_mappings = port_mappings(PortMappings, [])},
+  network_infos(Rest, [NetworkInfo1|Acc]);
+network_infos([_|Rest], Acc) ->
+  network_infos(Rest, Acc).
 
 ip_addresses([], Acc) ->
   Acc;
@@ -416,7 +410,21 @@ ip_addresses([#{ip_address := IPAddressBin}|Rest], Acc) ->
     %% Raise this error somehow?
     _Else ->
       ip_addresses(Rest, Acc)
-   end.
+   end;
+ip_addresses([_|Rest], Acc) ->
+  ip_addresses(Rest, Acc).
+
+port_mappings(#{port_mappings := PortMappings}) ->
+  port_mappings(PortMappings, []);
+port_mappings(_) -> [].
+
+port_mappings([], Acc) ->
+  Acc;
+port_mappings([#{container_port := ContainerPort, host_port := HostPort, protocol := Protocol}|Rest], Acc) ->
+  PortMapping1 = #port_mapping{protocol = protocol(Protocol), host_port = HostPort, container_port = ContainerPort},
+  port_mappings(Rest, [PortMapping1|Acc]);
+port_mappings([_|Rest], Acc) ->
+  port_mappings(Rest, Acc). 
 
 
 -spec(id(mesos_agent_state()) -> binary()).
