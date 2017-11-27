@@ -40,7 +40,8 @@ proto() ->
 maybe_enable_ssl(Options) ->
   case application:get_env(?APP, ssl, false) of
     true ->
-      [{ssl, [{verify, verify_none}]}|Options];
+      SSLOptions = [{verify, verify_none}, {server_name_indication, disable}],
+      [{ssl, SSLOptions}|Options];
     false ->
       Options
   end.
