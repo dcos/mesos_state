@@ -6,9 +6,7 @@
    [kernel,
     stdlib,
     jiffy,
-    lager,
-    inets,
-    ssl
+    lager
    ]},
   {env,[]},
   {modules, []},
