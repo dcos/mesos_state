@@ -23,7 +23,7 @@
 -define(ALLOWED_CHAR_GUARD(Char), (Char >= $a andalso Char =< $z) orelse (Char >= $0 andalso Char =< $9)).
 
 %% API
--export([ip/0, domain_frag/1, label/1]).
+-export([domain_frag/1, label/1]).
 
 -export_type([task_state/0, framework_id/0, framework_name/0, task_id/0, executor_id/0, task_name/0, labels/0,
     resource/0, resource_name/0, role/0, slave_id/0, hostname/0, protocol/0, mesos_port/0, ip_address/0,
@@ -31,48 +31,7 @@
     slave/0, task/0
 ]).
 
--spec(ip() -> inet:ip4_address()).
-ip() ->
-    case dcos_ip() of
-        false ->
-            infer_ip();
-        IP ->
-            IP
-    end.
-
-infer_ip() ->
-    ForeignIP = foreign_ip(),
-    {ok, Socket} = gen_udp:open(0),
-    inet_udp:connect(Socket, ForeignIP, 4),
-    {ok, {Address, _LocalPort}} = inet:sockname(Socket),
-    gen_udp:close(Socket),
-    Address.
-
-foreign_ip() ->
-    case inet:gethostbyname("leader.mesos") of
-        {ok, Hostent} ->
-            [Addr | _] = Hostent#hostent.h_addr_list,
-            Addr;
-        _ ->
-            {192, 88, 99, 0}
-    end.
-
-
-%% Regex borrowed from:
-%% http://stackoverflow.com/questions/12794358/how-to-strip-all-blank-characters-in-a-string-in-erlang
--spec(dcos_ip() -> false | inet:ip4_address()).
-dcos_ip() ->
-    String = os:cmd("/opt/mesosphere/bin/detect_ip"),
-    String1 = re:replace(String, "(^\\s+)|(\\s+$)", "", [global, {return, list}]),
-    case inet:parse_ipv4_address(String1) of
-        {ok, IP} ->
-            IP;
-        {error, einval} ->
-            false
-    end.
-
 -spec(domain_frag([binary()]) -> binary()).
-
 %% DomainFrag mangles the given name in order to produce a valid domain fragment.
 %% A valid domain fragment will consist of one or more host name labels
 domain_frag(BinaryString) when is_binary(BinaryString) ->
