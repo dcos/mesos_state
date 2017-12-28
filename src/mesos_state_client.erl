@@ -23,28 +23,8 @@
 
 -export_type([mesos_agent_state/0]).
 
-
 %% API
--export([poll/0, poll/1, poll/2, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
-
--spec(proto() -> string()).
-proto() ->
-  case application:get_env(?APP, ssl, false) of
-    true ->
-      "https";
-    false ->
-      "http"
-  end.
-
--spec(maybe_enable_ssl(list()) -> list()).
-maybe_enable_ssl(Options) ->
-  case application:get_env(?APP, ssl, false) of
-    true ->
-      SSLOptions = [{verify, verify_none}, {server_name_indication, disable}],
-      [{ssl, SSLOptions}|Options];
-    false ->
-      Options
-  end.
+-export([poll/1, poll/2, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
 
 format_token(AuthToken) ->
   lists:flatten("token=" ++ AuthToken).
@@ -59,26 +39,17 @@ maybe_add_token(Headers) ->
       [{"Authorization", AuthToken1}]
   end.
 
--spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
-poll() ->
-  Proto = proto(),
-  poll(Proto ++ "://localhost:5051/state").
-
--spec(poll(inet:ip_address(), inet:port_number()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
-poll(IP, Port) when is_tuple(IP) andalso is_number(Port) ->
-  Proto = proto(),
-  IPStr = inet:ntoa(IP),
-  PortStr = integer_to_list(Port),
-  URI = lists:flatten(Proto ++ "://" ++ IPStr ++ ":" ++ PortStr ++ "/state"),
-  poll(URI).
-
 -spec(poll(string()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
 poll(URI) ->
-  Options = [
+    poll(URI, []).
+
+-spec(poll(string(), list()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
+poll(URI, Options) ->
+  Options0 = [
     {timeout, application:get_env(?APP, timeout, ?DEFAULT_TIMEOUT)},
     {connect_timeout, application:get_env(?APP, connect_timeout, ?DEFAULT_CONNECT_TIMEOUT)}
   ],
-  Options1 = maybe_enable_ssl(Options),
+  Options1 = Options0 ++ Options,
   {ok, Hostname} = inet:gethostname(),
   UserAgent = lists:flatten(io_lib:format("Mesos-State / Host: ~s, Pid: ~s", [Hostname, os:getpid()])),
   Headers = [{"Accept", "application/json"}, {"User-Agent", UserAgent}],
