@@ -17,81 +17,16 @@
 -include_lib("eunit/include/eunit.hrl").
 -endif.
 
--define(SERVICE_AUTH_TOKEN_ENV_VARIABLE, "SERVICE_AUTH_TOKEN").
-
 -opaque mesos_agent_state() :: map().
 
 -export_type([mesos_agent_state/0]).
 
-
 %% API
--export([poll/0, poll/1, poll/2, parse_response/1, flags/1, pid/1, tasks/1, id/1, slaves/1, frameworks/1]).
-
--spec(proto() -> string()).
-proto() ->
-  case application:get_env(?APP, ssl, false) of
-    true ->
-      "https";
-    false ->
-      "http"
-  end.
-
--spec(maybe_enable_ssl(list()) -> list()).
-maybe_enable_ssl(Options) ->
-  case application:get_env(?APP, ssl, false) of
-    true ->
-      SSLOptions = [{verify, verify_none}, {server_name_indication, disable}],
-      [{ssl, SSLOptions}|Options];
-    false ->
-      Options
-  end.
-
-format_token(AuthToken) ->
-  lists:flatten("token=" ++ AuthToken).
-
--spec(maybe_add_token(list({string(), string()})) -> list({string(), string()})).
-maybe_add_token(Headers) ->
-  case os:getenv(?SERVICE_AUTH_TOKEN_ENV_VARIABLE) of
-    false ->
-      Headers;
-    AuthToken0 ->
-      AuthToken1 = format_token(AuthToken0),
-      [{"Authorization", AuthToken1}]
-  end.
-
--spec(poll() -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
-poll() ->
-  Proto = proto(),
-  poll(Proto ++ "://localhost:5051/state").
-
--spec(poll(inet:ip_address(), inet:port_number()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
-poll(IP, Port) when is_tuple(IP) andalso is_number(Port) ->
-  Proto = proto(),
-  IPStr = inet:ntoa(IP),
-  PortStr = integer_to_list(Port),
-  URI = lists:flatten(Proto ++ "://" ++ IPStr ++ ":" ++ PortStr ++ "/state"),
-  poll(URI).
-
--spec(poll(string()) -> {ok, mesos_agent_state()} | {error, Reason :: term()}).
-poll(URI) ->
-  Options = [
-    {timeout, application:get_env(?APP, timeout, ?DEFAULT_TIMEOUT)},
-    {connect_timeout, application:get_env(?APP, connect_timeout, ?DEFAULT_CONNECT_TIMEOUT)}
-  ],
-  Options1 = maybe_enable_ssl(Options),
-  {ok, Hostname} = inet:gethostname(),
-  UserAgent = lists:flatten(io_lib:format("Mesos-State / Host: ~s, Pid: ~s", [Hostname, os:getpid()])),
-  Headers = [{"Accept", "application/json"}, {"User-Agent", UserAgent}],
-  Headers1 = maybe_add_token(Headers),
-  Response = httpc:request(get, {URI, Headers1}, Options1, [{body_format, binary}]),
-  handle_response(Response).
-
-handle_response({error, Reason}) ->
-  {error, Reason};
-handle_response({ok, {_StatusLine = {_HTTPVersion, 200 = _StatusCode, _ReasonPhrase}, _Headers, Body}}) ->
-  parse_response(Body);
-handle_response({ok, {StatusLine, _Headers, _Body}}) ->
-  {error, StatusLine}.
+-export([
+  parse_response/1,
+  flags/1, pid/1, tasks/1, id/1,
+  slaves/1, frameworks/1
+]).
 
 -spec(parse_response(Body :: binary()) -> {ok, mesos_agent_state()}).
 parse_response(Body) ->
