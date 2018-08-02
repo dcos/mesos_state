@@ -166,7 +166,7 @@ tasks([Task | Tasks], Framework, Slave, ParsedBody, TasksAcc) ->
   case catch task(Task, Framework, Slave) of
     %% Don't bail on failed tasks
     {'EXIT', Reason} ->
-      lager:error("Failed to parse task: ~p", [Reason]),
+      error_logger:error_msg("Failed to parse task: ~p", [Reason]),
       tasks(Tasks, Framework, Slave, ParsedBody, TasksAcc);
     TaskRecord ->
       tasks(Tasks, Framework, Slave, ParsedBody, [TaskRecord | TasksAcc])
