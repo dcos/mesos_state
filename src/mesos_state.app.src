@@ -1,17 +1,12 @@
-{application, mesos_state,
- [{description, "An OTP application"},
-  {vsn, "0.1.0"},
-  {registered, []},
-  {applications,
-   [kernel,
-    stdlib,
-    jiffy,
-    lager
-   ]},
-  {env,[]},
-  {modules, []},
-
-  {maintainers, []},
-  {licenses, []},
-  {links, []}
- ]}.
+{application, mesos_state, [
+    {description, "Mesos State Client"},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {applications, [
+        kernel,
+        stdlib,
+        jiffy
+    ]},
+    {env,[]},
+    {modules, []}
+]}.
