@@ -187,7 +187,8 @@ task(Task, Framework, Slaves) ->
     container = container(maps:get(container, Task, undefined)),
     discovery = discovery(maps:get(discovery, Task, undefined)),
     slave = Slave,
-    framework = framework(Framework)
+    framework = framework(Framework),
+    health_check = health_check(Task)
   }.
 
 task_labels(Labels) ->
@@ -408,6 +409,11 @@ protocol(BinString) when is_binary(BinString) ->
         "tcp" -> tcp;
         "udp" -> udp
     end.
+
+health_check(#{health_check := HealthCheck}) when is_map(HealthCheck) ->
+    HealthCheck;
+health_check(_Task) ->
+    undefined.
 
 -ifdef(TEST).
 

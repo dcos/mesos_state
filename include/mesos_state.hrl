@@ -21,6 +21,7 @@
 -type slave_id() :: binary().
 -type hostname() :: binary().
 -type protocol() :: tcp | udp.
+-type health_check() :: #{atom() => term()}.
 
 -record(mesos_port, {
   number :: inet:port_number(),
@@ -125,7 +126,8 @@
   discovery :: undefined | discovery(),
   container :: undefined | container(),
   slave :: slave(),
-  framework :: framework()
+  framework :: framework(),
+  health_check :: undefined | health_check()
   %% Should we add executor information
   %% -executor name
   %% -executor id? (which is different than the executor id on
