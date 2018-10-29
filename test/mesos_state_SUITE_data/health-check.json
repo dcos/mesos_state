@@ -1,0 +1,425 @@
+{
+  "version": "1.8.0",
+  "git_sha": "c1010e19dd7f029c8c15c78bf12a63ca5bcf52c0",
+  "build_date": "2018-10-22 19:09:02",
+  "build_time": 1540235342,
+  "build_user": "",
+  "start_time": 1540840749.650422,
+  "id": "0e559f52-e43a-497a-90b8-11688d98f60c-S0",
+  "pid": "slave(1)@172.17.0.3:5051",
+  "hostname": "172.17.0.3",
+  "capabilities": [
+    "MULTI_ROLE",
+    "HIERARCHICAL_ROLE",
+    "RESERVATION_REFINEMENT",
+    "RESOURCE_PROVIDER",
+    "RESIZE_VOLUME"
+  ],
+  "resources": {
+    "disk": 41520,
+    "mem": 6949,
+    "gpus": 0,
+    "cpus": 4,
+    "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+  },
+  "reserved_resources": {},
+  "unreserved_resources": {
+    "disk": 41520,
+    "mem": 6949,
+    "gpus": 0,
+    "cpus": 4,
+    "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+  },
+  "reserved_resources_full": {},
+  "unreserved_resources_full": [
+    {
+      "name": "ports",
+      "type": "RANGES",
+      "ranges": {
+        "range": [
+          {
+            "begin": 1025,
+            "end": 2180
+          },
+          {
+            "begin": 2182,
+            "end": 3887
+          },
+          {
+            "begin": 3889,
+            "end": 5049
+          },
+          {
+            "begin": 5052,
+            "end": 8079
+          },
+          {
+            "begin": 8082,
+            "end": 8180
+          },
+          {
+            "begin": 8182,
+            "end": 32000
+          }
+        ]
+      },
+      "role": "*"
+    },
+    {
+      "name": "disk",
+      "type": "SCALAR",
+      "scalar": {
+        "value": 41520
+      },
+      "role": "*"
+    },
+    {
+      "name": "cpus",
+      "type": "SCALAR",
+      "scalar": {
+        "value": 4
+      },
+      "role": "*"
+    },
+    {
+      "name": "mem",
+      "type": "SCALAR",
+      "scalar": {
+        "value": 6949
+      },
+      "role": "*"
+    }
+  ],
+  "reserved_resources_allocated": {},
+  "unreserved_resources_allocated": {
+    "disk": 0,
+    "mem": 160,
+    "gpus": 0,
+    "cpus": 0.2,
+    "ports": "[31871-31872]"
+  },
+  "attributes": {},
+  "master_hostname": "172.17.0.2",
+  "external_log_file": "/var/log/mesos/mesos-agent.log",
+  "flags": {
+    "slave_subsystems": "cpu,memory",
+    "appc_simple_discovery_uri_prefix": "http://",
+    "appc_store_dir": "/tmp/mesos/store/appc",
+    "authenticate_http_executors": "false",
+    "authenticate_http_readonly": "false",
+    "authenticate_http_readwrite": "false",
+    "authenticatee": "crammd5",
+    "authentication_backoff_factor": "1secs",
+    "authentication_timeout_max": "1mins",
+    "authentication_timeout_min": "5secs",
+    "authorizer": "local",
+    "cgroups_cpu_enable_pids_and_tids_count": "false",
+    "cgroups_destroy_timeout": "1mins",
+    "cgroups_enable_cfs": "true",
+    "cgroups_hierarchy": "/sys/fs/cgroup",
+    "cgroups_limit_swap": "false",
+    "cgroups_root": "docker/06af992adf522231fddbea0b83f836ccec1e47ac23e5dedc7992990f3db64e0a/mesos",
+    "container_disk_watch_interval": "15secs",
+    "container_logger": "com_mesosphere_mesos_JournaldLogger",
+    "containerizers": "docker,mesos",
+    "default_container_dns": "docker {\n  network_mode: USER\n  dns {\n    nameservers: \"198.51.100.1\"\n    nameservers: \"fd01:d::c633:6401\"\n  }\n}\n",
+    "default_role": "*",
+    "disallow_sharing_agent_pid_namespace": "true",
+    "disk_watch_interval": "1mins",
+    "docker": "docker",
+    "docker_kill_orphans": "true",
+    "docker_registry": "https://registry-1.docker.io",
+    "docker_remove_delay": "1hrs",
+    "docker_socket": "/var/run/docker.sock",
+    "docker_stop_timeout": "20secs",
+    "docker_store_dir": "/var/lib/mesos/slave/store/docker",
+    "docker_volume_checkpoint_dir": "/var/lib/mesos/isolators/docker/volume",
+    "enforce_container_disk_quota": "false",
+    "executor_environment_variables": "{\"LIBPROCESS_NUM_WORKER_THREADS\":\"8\",\"PATH\":\"/usr/bin:/bin\",\"SHELL\":\"/usr/bin/bash\"}",
+    "executor_registration_timeout": "10mins",
+    "executor_reregistration_timeout": "10secs",
+    "executor_shutdown_grace_period": "5secs",
+    "external_log_file": "/var/log/mesos/mesos-agent.log",
+    "fetcher_cache_dir": "/tmp/mesos/fetch",
+    "fetcher_cache_size": "2GB",
+    "fetcher_stall_timeout": "1mins",
+    "frameworks_home": "",
+    "gc_delay": "2days",
+    "gc_disk_headroom": "0.1",
+    "gc_non_executor_container_sandboxes": "true",
+    "help": "false",
+    "hostname_lookup": "false",
+    "http_command_executor": "false",
+    "http_heartbeat_interval": "30secs",
+    "image_gc_config": "image_disk_headroom: 0.1\nimage_disk_watch_interval {\n  nanoseconds: 300000000000\n}\n",
+    "image_providers": "docker",
+    "initialize_driver_logging": "true",
+    "ip_discovery_command": "/opt/mesosphere/bin/detect_ip",
+    "isolation": "cgroups/all,disk/du,network/cni,filesystem/linux,docker/runtime,docker/volume,volume/sandbox_path,volume/secret,posix/rlimits,namespaces/pid,linux/capabilities,com_mesosphere_dcos_MetricsIsolatorModule,gpu/nvidia",
+    "launcher": "linux",
+    "launcher_dir": "/opt/mesosphere/active/mesos/libexec/mesos",
+    "logbufsecs": "0",
+    "logging_level": "INFO",
+    "master": "zk://zk-1.zk:2181,zk-2.zk:2181,zk-3.zk:2181,zk-4.zk:2181,zk-5.zk:2181/mesos",
+    "max_completed_executors_per_framework": "150",
+    "memory_profiling": "true",
+    "modules_dir": "/opt/mesosphere/etc/mesos-slave-modules",
+    "network_cni_config_dir": "/opt/mesosphere/etc/dcos/network/cni",
+    "network_cni_metrics": "true",
+    "network_cni_plugins_dir": "/opt/mesosphere/active/cni/:/opt/mesosphere/active/dcos-cni/:/opt/mesosphere/active/mesos/libexec/mesos",
+    "oversubscribed_resources_interval": "15secs",
+    "perf_duration": "10secs",
+    "perf_interval": "1mins",
+    "port": "5051",
+    "qos_correction_interval_min": "0ns",
+    "quiet": "false",
+    "reconfiguration_policy": "additive",
+    "recover": "reconnect",
+    "recovery_timeout": "1days",
+    "registration_backoff_factor": "1secs",
+    "resources": "[{\"name\": \"ports\", \"type\": \"RANGES\", \"ranges\": {\"range\": [{\"begin\": 1025, \"end\": 2180}, {\"begin\": 2182, \"end\": 3887}, {\"begin\": 3889, \"end\": 5049}, {\"begin\": 5052, \"end\": 8079}, {\"begin\": 8082, \"end\": 8180}, {\"begin\": 8182, \"end\": 32000}]}}, {\"name\": \"disk\", \"role\": \"*\", \"scalar\": {\"value\": 41520}, \"type\": \"SCALAR\"}]",
+    "revocable_cpu_low_priority": "true",
+    "runtime_dir": "/var/run/mesos",
+    "sandbox_directory": "/mnt/mesos/sandbox",
+    "strict": "true",
+    "switch_user": "true",
+    "systemd_enable_support": "false",
+    "systemd_runtime_directory": "/run/systemd/system",
+    "version": "false",
+    "work_dir": "/var/lib/mesos/slave",
+    "zk_session_timeout": "10secs"
+  },
+  "frameworks": [
+    {
+      "id": "0e559f52-e43a-497a-90b8-11688d98f60c-0000",
+      "name": "marathon",
+      "user": "root",
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "hostname": "172.17.0.2",
+      "principal": "dcos_marathon",
+      "role": "slave_public",
+      "executors": [
+        {
+          "id": "app.93e220b3-dbaf-11e8-9735-70b3d5800002",
+          "name": "Command Executor (Task: app.93e220b3-dbaf-11e8-9735-70b3d5800002) (Command: sh -c 'sleep 300; p...')",
+          "source": "app.93e220b3-dbaf-11e8-9735-70b3d5800002",
+          "container": "a6e4f796-8939-4579-8059-c8aa8719f51d",
+          "directory": "/var/lib/mesos/slave/slaves/0e559f52-e43a-497a-90b8-11688d98f60c-S0/frameworks/0e559f52-e43a-497a-90b8-11688d98f60c-0000/executors/app.93e220b3-dbaf-11e8-9735-70b3d5800002/runs/a6e4f796-8939-4579-8059-c8aa8719f51d",
+          "resources": {
+            "disk": 0,
+            "mem": 160,
+            "gpus": 0,
+            "cpus": 0.2,
+            "ports": "[31871-31872]"
+          },
+          "role": "slave_public",
+          "tasks": [
+            {
+              "id": "app.93e220b3-dbaf-11e8-9735-70b3d5800002",
+              "name": "app",
+              "framework_id": "0e559f52-e43a-497a-90b8-11688d98f60c-0000",
+              "executor_id": "",
+              "slave_id": "0e559f52-e43a-497a-90b8-11688d98f60c-S0",
+              "state": "TASK_RUNNING",
+              "resources": {
+                "disk": 0,
+                "mem": 128,
+                "gpus": 0,
+                "cpus": 0.1,
+                "ports": "[31871-31872]"
+              },
+              "role": "slave_public",
+              "statuses": [
+                {
+                  "state": "TASK_STARTING",
+                  "timestamp": 1540840778.684191,
+                  "container_status": {
+                    "container_id": {
+                      "value": "a6e4f796-8939-4579-8059-c8aa8719f51d"
+                    },
+                    "network_infos": [
+                      {
+                        "ip_addresses": [
+                          {
+                            "protocol": "IPv4",
+                            "ip_address": "172.17.0.3"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "state": "TASK_RUNNING",
+                  "timestamp": 1540840779.496553,
+                  "container_status": {
+                    "container_id": {
+                      "value": "a6e4f796-8939-4579-8059-c8aa8719f51d"
+                    },
+                    "network_infos": [
+                      {
+                        "ip_addresses": [
+                          {
+                            "protocol": "IPv4",
+                            "ip_address": "172.17.0.3"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "discovery": {
+                "visibility": "FRAMEWORK",
+                "name": "app",
+                "ports": {
+                  "ports": [
+                    {
+                      "number": 31871,
+                      "name": "http",
+                      "protocol": "udp",
+                      "labels": {
+                        "labels": [
+                          {
+                            "key": "VIP_0",
+                            "value": "/app:80"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "number": 31871,
+                      "name": "http",
+                      "protocol": "tcp",
+                      "labels": {
+                        "labels": [
+                          {
+                            "key": "VIP_0",
+                            "value": "/app:80"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "number": 31872,
+                      "name": "foobar",
+                      "protocol": "udp"
+                    },
+                    {
+                      "number": 31872,
+                      "name": "foobar",
+                      "protocol": "tcp"
+                    }
+                  ]
+                }
+              },
+              "container": {
+                "type": "DOCKER",
+                "docker": {
+                  "image": "python:3-alpine",
+                  "network": "HOST",
+                  "privileged": false,
+                  "parameters": [
+                    {
+                      "key": "label",
+                      "value": "MESOS_TASK_ID=app.93e220b3-dbaf-11e8-9735-70b3d5800002"
+                    }
+                  ],
+                  "force_pull_image": false
+                }
+              },
+              "health_check": {
+                "delay_seconds": 15,
+                "interval_seconds": 60,
+                "timeout_seconds": 20,
+                "consecutive_failures": 3,
+                "grace_period_seconds": 300,
+                "type": "HTTP",
+                "http": {
+                  "protocol": "IPv4",
+                  "scheme": "http",
+                  "port": 31871,
+                  "path": "/"
+                }
+              }
+            }
+          ],
+          "queued_tasks": [],
+          "completed_tasks": []
+        }
+      ],
+      "completed_executors": [
+        {
+          "id": "app.2a728f28-db44-11e8-869e-70b3d5800002",
+          "name": "Command Executor (Task: app.2a728f28-db44-11e8-869e-70b3d5800002) (Command: sh -c 'python3 -m h...')",
+          "source": "app.2a728f28-db44-11e8-869e-70b3d5800002",
+          "container": "d3da9e52-e9fa-478b-8f97-9dbddfb64100",
+          "directory": "/var/lib/mesos/slave/slaves/0e559f52-e43a-497a-90b8-11688d98f60c-S0/frameworks/0e559f52-e43a-497a-90b8-11688d98f60c-0000/executors/app.2a728f28-db44-11e8-869e-70b3d5800002/runs/d3da9e52-e9fa-478b-8f97-9dbddfb64100",
+          "resources": {
+            "disk": 0,
+            "mem": 32,
+            "gpus": 0,
+            "cpus": 0.1
+          },
+          "role": "slave_public",
+          "tasks": [],
+          "queued_tasks": [],
+          "completed_tasks": []
+        },
+        {
+          "id": "app.80eefa01-d956-11e8-8b68-70b3d5800002",
+          "name": "Command Executor (Task: app.80eefa01-d956-11e8-8b68-70b3d5800002) (Command: sh -c 'python3 -m h...')",
+          "source": "app.80eefa01-d956-11e8-8b68-70b3d5800002",
+          "container": "78098f6d-f5b7-421b-9c2e-18508897aecc",
+          "directory": "/var/lib/mesos/slave/slaves/0e559f52-e43a-497a-90b8-11688d98f60c-S0/frameworks/0e559f52-e43a-497a-90b8-11688d98f60c-0000/executors/app.80eefa01-d956-11e8-8b68-70b3d5800002/runs/78098f6d-f5b7-421b-9c2e-18508897aecc",
+          "resources": {
+            "disk": 0,
+            "mem": 32,
+            "gpus": 0,
+            "cpus": 0.1
+          },
+          "role": "slave_public",
+          "tasks": [],
+          "queued_tasks": [],
+          "completed_tasks": []
+        },
+        {
+          "id": "app.1b5e13f3-dbaf-11e8-823d-70b3d5800002",
+          "name": "Command Executor (Task: app.1b5e13f3-dbaf-11e8-823d-70b3d5800002) (Command: sh -c 'python3 -m h...')",
+          "source": "app.1b5e13f3-dbaf-11e8-823d-70b3d5800002",
+          "container": "4a8502f2-cd70-400b-94ef-d512d4fd9db8",
+          "directory": "/var/lib/mesos/slave/slaves/0e559f52-e43a-497a-90b8-11688d98f60c-S0/frameworks/0e559f52-e43a-497a-90b8-11688d98f60c-0000/executors/app.1b5e13f3-dbaf-11e8-823d-70b3d5800002/runs/4a8502f2-cd70-400b-94ef-d512d4fd9db8",
+          "resources": {
+            "disk": 0,
+            "mem": 32,
+            "gpus": 0,
+            "cpus": 0.1
+          },
+          "role": "slave_public",
+          "tasks": [],
+          "queued_tasks": [],
+          "completed_tasks": []
+        },
+        {
+          "id": "app.46134e34-dbaf-11e8-823d-70b3d5800002",
+          "name": "Command Executor (Task: app.46134e34-dbaf-11e8-823d-70b3d5800002) (Command: sh -c 'sleep 300; p...')",
+          "source": "app.46134e34-dbaf-11e8-823d-70b3d5800002",
+          "container": "d6d66247-1a9c-4760-b0ae-1a880feb75ab",
+          "directory": "/var/lib/mesos/slave/slaves/0e559f52-e43a-497a-90b8-11688d98f60c-S0/frameworks/0e559f52-e43a-497a-90b8-11688d98f60c-0000/executors/app.46134e34-dbaf-11e8-823d-70b3d5800002/runs/d6d66247-1a9c-4760-b0ae-1a880feb75ab",
+          "resources": {
+            "disk": 0,
+            "mem": 32,
+            "gpus": 0,
+            "cpus": 0.1
+          },
+          "role": "slave_public",
+          "tasks": [],
+          "queued_tasks": [],
+          "completed_tasks": []
+        }
+      ]
+    }
+  ],
+  "completed_frameworks": []
+}
